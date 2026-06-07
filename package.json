@@ -1,0 +1,17 @@
+{
+  "name": "penghu-app",
+  "version": "1.0.0",
+  "description": "依據 [澎湖輪官網](https://tnc-kao.com.tw/) 設計的手機訂票網頁。",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/cli": "^8.4.0",
+    "@capacitor/core": "^8.4.0"
+  }
+}

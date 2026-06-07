@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#163bc0">
+  <title>澎湖輪訂票系統</title>
+  <link rel="icon" href="https://tnc-kao.com.tw/images/icons/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-touch-icon" href="https://tnc-kao.com.tw/images/icons/logo.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="澎湖輪">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 頂部導覽列 -->
+    <header class="app-header">
+      <button class="btn-menu" id="btn-menu" aria-label="開啟選單">
+        <img src="https://tnc-kao.com.tw/images/icons/ic_menu.svg" alt="">
+      </button>
+      <a href="#" class="logo-link" data-nav="home">
+        <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="logo">
+      </a>
+      <a href="https://tnc-kao.com.tw/order/code" class="btn-header-action" target="_blank" rel="noopener">
+        查詢 / 付款
+      </a>
+    </header>
+
+    <!-- 側邊選單 -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <nav class="side-menu" id="side-menu" aria-hidden="true">
+      <div class="side-menu-header">
+        <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="logo">
+        <button class="btn-close-menu" id="btn-close-menu" aria-label="關閉選單">✕</button>
+      </div>
+      <ul class="menu-list">
+        <li><a href="#" data-nav="home"><img src="https://tnc-kao.com.tw/images/icons/ic_boat_grey.svg" alt="">線上訂票</a></li>
+        <li><a href="https://tnc-kao.com.tw/about/about" target="_blank" rel="noopener"><img src="https://tnc-kao.com.tw/images/icons/ic_board.png" alt="">澎湖輪簡介</a></li>
+        <li><a href="https://tnc-kao.com.tw/schedule" target="_blank" rel="noopener"><img src="https://tnc-kao.com.tw/images/icons/ic_plan.svg" alt="">航班查詢</a></li>
+        <li><a href="https://tnc-kao.com.tw/guide" target="_blank" rel="noopener"><img src="https://tnc-kao.com.tw/images/icons/ic_flag.svg" alt="">準備搭乘</a></li>
+        <li><a href="https://tnc-kao.com.tw/transport" target="_blank" rel="noopener"><img src="https://tnc-kao.com.tw/images/icons/ic_car.svg" alt="">預約寄車</a></li>
+        <li><a href="https://tnc-kao.com.tw/schedule/ticket" target="_blank" rel="noopener">票價資訊</a></li>
+        <li><a href="https://tnc-kao.com.tw/schedule/timetable" target="_blank" rel="noopener">航班時刻</a></li>
+      </ul>
+    </nav>
+
+    <!-- 首頁 -->
+    <section id="page-home" class="page active">
+      <div class="hero-bg"></div>
+      <div class="page-scroll">
+        <div class="award-badges">
+          <span class="award-badge">Good Design Award 2024</span>
+          <span class="award-badge">iF Design Award 2025</span>
+        </div>
+
+        <!-- 訂票卡片（仿官網） -->
+        <div class="booking-card">
+          <div class="trip-tabs">
+            <button class="trip-tab active" data-trip="single">單趟旅程</button>
+            <button class="trip-tab" data-trip="round">來回旅程</button>
+          </div>
+
+          <div class="booking-fields">
+            <button class="field-btn" data-nav="route" id="field-departure">
+              <img src="https://tnc-kao.com.tw/images/icons/ic_boat_grey.svg" alt="" class="field-icon">
+              <div class="field-text">
+                <span class="field-label">出發地</span>
+                <span class="field-value" id="home-departure">高雄</span>
+              </div>
+            </button>
+            <button class="field-btn" data-nav="date" id="field-date-go">
+              <img src="https://tnc-kao.com.tw/images/icons/ic_calendar_grey.svg" alt="" class="field-icon">
+              <div class="field-text">
+                <span class="field-label">去程日期</span>
+                <span class="field-value" id="home-date-go">請選擇日期</span>
+              </div>
+            </button>
+            <button class="field-btn field-round-only hidden" data-nav="date-back" id="field-date-back">
+              <img src="https://tnc-kao.com.tw/images/icons/ic_calendar_grey.svg" alt="" class="field-icon">
+              <div class="field-text">
+                <span class="field-label">回程日期</span>
+                <span class="field-value" id="home-date-back">請選擇日期</span>
+              </div>
+            </button>
+          </div>
+
+          <label class="vehicle-check">
+            <input type="checkbox" id="add-vehicle">
+            <span>加購車輛</span>
+          </label>
+
+          <button class="btn btn-primary btn-large" id="btn-search">
+            搜尋航班
+          </button>
+        </div>
+
+        <!-- 旅客中心 -->
+        <section class="section-block passenger-section">
+          <p class="section-en">PASSENGER</p>
+          <h2 class="section-title">旅客中心</h2>
+          <div class="passenger-grid">
+            <a href="https://tnc-kao.com.tw/order/code" class="passenger-item" target="_blank" rel="noopener">
+              <img src="https://tnc-kao.com.tw/images/items/img_booking.png" alt="">
+              <h3>我的訂單</h3>
+              <p>查詢 / 付款票券</p>
+            </a>
+            <a href="https://tnc-kao.com.tw/transport" class="passenger-item" target="_blank" rel="noopener">
+              <img src="https://tnc-kao.com.tw/images/items/img_car.png" alt="">
+              <h3>預約寄車</h3>
+              <p>申請車輛託運服務</p>
+            </a>
+            <a href="https://tnc-kao.com.tw/schedule/ticket" class="passenger-item" target="_blank" rel="noopener">
+              <img src="https://tnc-kao.com.tw/images/items/img_search.png" alt="">
+              <h3>票價查詢</h3>
+              <p>票價產品一覽表</p>
+            </a>
+            <a href="https://tnc-kao.com.tw/guide" class="passenger-item" target="_blank" rel="noopener">
+              <img src="https://tnc-kao.com.tw/images/items/img_guide.png" alt="">
+              <h3>乘船指南</h3>
+              <p>旅客乘船須知事宜</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- 最新消息 -->
+        <section class="section-block news-section">
+          <p class="section-en">NEWS</p>
+          <h2 class="section-title">最新消息</h2>
+          <ul class="news-list">
+            <li>
+              <span class="news-date">2026/06/02</span>
+              <a href="https://tnc-kao.com.tw/news/show/197" target="_blank" rel="noopener">115年【6～8月週五夜航限定活動資訊】</a>
+            </li>
+            <li>
+              <span class="news-date">2026/05/22</span>
+              <a href="https://tnc-kao.com.tw/news/show/196" target="_blank" rel="noopener">(115)7月1日起澎湖輪修正高雄碼頭服務及收貨作業時間</a>
+            </li>
+            <li>
+              <span class="news-date">2026/03/04</span>
+              <a href="https://tnc-kao.com.tw/news/show/191" target="_blank" rel="noopener">115年度八月份海上實習實務培訓，部份航班不販售頭等艙房</a>
+            </li>
+          </ul>
+          <a href="https://tnc-kao.com.tw/news" class="link-more" target="_blank" rel="noopener">更多消息 →</a>
+        </section>
+
+        <footer class="app-footer">
+          <p class="footer-company">台灣航業股份有限公司</p>
+          <div class="footer-contact">
+            <p><strong>高雄售票處</strong> 高雄市鼓山區捷興一街 5 號<br>(07) 561-5313</p>
+            <p><strong>澎湖售票處</strong> 澎湖縣馬公市臨海路 36 之 1 號<br>(06) 926-4087</p>
+          </div>
+          <a href="https://tnc-kao.com.tw/" class="footer-link" target="_blank" rel="noopener">前往官網 tnc-kao.com.tw</a>
+        </footer>
+      </div>
+    </section>
+
+    <!-- 選擇出發地 -->
+    <section id="page-route" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home" aria-label="返回">
+          <span aria-hidden="true">←</span>
+        </button>
+        <h2>選擇出發地</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <p class="section-label">請選擇您的出發港口</p>
+        <div class="route-cards">
+          <button class="route-card" data-departure="kaohsiung">
+            <img src="https://tnc-kao.com.tw/images/icons/ic_boat_grey.svg" alt="" class="route-icon">
+            <div class="route-info">
+              <span class="route-city">高雄</span>
+              <span class="route-hint">高雄港出發，前往澎湖</span>
+            </div>
+          </button>
+          <button class="route-card" data-departure="penghu">
+            <img src="https://tnc-kao.com.tw/images/icons/ic_boat_grey.svg" alt="" class="route-icon">
+            <div class="route-info">
+              <span class="route-city">澎湖</span>
+              <span class="route-hint">馬公港出發，前往高雄</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 選擇日期 -->
+    <section id="page-date" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home" aria-label="返回">
+          <span aria-hidden="true">←</span>
+        </button>
+        <h2 id="date-page-title">選擇去程日期</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="selected-route-banner" id="date-route-banner"></div>
+
+        <p class="section-label" id="date-field-label">選擇出發日期</p>
+        <div class="date-picker-wrap">
+          <input type="date" id="departure-date" class="date-input" aria-label="出發日期">
+        </div>
+
+        <div class="calendar-hint">
+          <p>訂票開放：開航前 56 天起至開航前 4 小時止</p>
+          <p>開航前 30 分鐘停止售票</p>
+          <p>船期受天候影響，請以官網公告為準</p>
+        </div>
+
+        <button class="btn btn-primary btn-large" id="btn-date-confirm" disabled>
+          確認日期
+        </button>
+      </div>
+    </section>
+
+    <!-- 航班結果 -->
+    <section id="page-results" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home" aria-label="返回">
+          <span aria-hidden="true">←</span>
+        </button>
+        <h2>航班查詢結果</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="search-summary" id="search-summary"></div>
+        <div class="flight-list" id="flight-list"></div>
+        <p class="confirm-note">示範航班資訊。完整訂票請前往<a href="https://tnc-kao.com.tw/booking" target="_blank" rel="noopener">官網線上訂票</a>。</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
+</html>
