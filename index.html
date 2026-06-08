@@ -55,40 +55,48 @@
           <span class="award-badge">iF Design Award 2025</span>
         </div>
 
-        <!-- 訂票卡片（仿官網） -->
+        <!-- 訂票卡片 -->
         <div class="booking-card">
           <div class="trip-tabs">
-            <button class="trip-tab active" data-trip="single">單趟旅程</button>
-            <button class="trip-tab" data-trip="round">來回旅程</button>
+            <button class="trip-tab active" data-trip="single">單程票</button>
+            <button class="trip-tab" data-trip="round">來回票</button>
+          </div>
+
+          <!-- 路線選擇 -->
+          <div class="route-row" data-nav="route" id="field-departure">
+            <div class="route-station">
+              <div class="route-station-label">出發地</div>
+              <div class="route-station-name" id="home-departure">高雄</div>
+            </div>
+            <div class="route-swap">⇄</div>
+            <div class="route-station">
+              <div class="route-station-label">目的地</div>
+              <div class="route-station-name" id="home-destination">澎湖</div>
+            </div>
           </div>
 
           <div class="booking-fields">
-            <button class="field-btn" data-nav="route" id="field-departure">
-              <img src="https://tnc-kao.com.tw/images/icons/ic_boat_grey.svg" alt="" class="field-icon">
-              <div class="field-text">
-                <span class="field-label">出發地</span>
-                <span class="field-value" id="home-departure">高雄</span>
-              </div>
-            </button>
             <button class="field-btn" data-nav="date" id="field-date-go">
-              <img src="https://tnc-kao.com.tw/images/icons/ic_calendar_grey.svg" alt="" class="field-icon">
+              <span class="field-icon">📅</span>
               <div class="field-text">
                 <span class="field-label">去程日期</span>
                 <span class="field-value" id="home-date-go">請選擇日期</span>
               </div>
+              <span class="field-arrow">›</span>
             </button>
             <button class="field-btn field-round-only hidden" data-nav="date-back" id="field-date-back">
-              <img src="https://tnc-kao.com.tw/images/icons/ic_calendar_grey.svg" alt="" class="field-icon">
+              <span class="field-icon">📅</span>
               <div class="field-text">
                 <span class="field-label">回程日期</span>
                 <span class="field-value" id="home-date-back">請選擇日期</span>
               </div>
+              <span class="field-arrow">›</span>
             </button>
           </div>
 
           <label class="vehicle-check">
             <input type="checkbox" id="add-vehicle">
-            <span>加購車輛</span>
+            <span>加購車輛託運</span>
           </label>
 
           <button class="btn btn-primary btn-large" id="btn-search">
@@ -96,53 +104,57 @@
           </button>
         </div>
 
-        <!-- 旅客中心 -->
-        <section class="section-block passenger-section">
-          <p class="section-en">PASSENGER</p>
-          <h2 class="section-title">旅客中心</h2>
-          <div class="passenger-grid">
-            <a href="https://tnc-kao.com.tw/order/code" class="passenger-item" target="_blank" rel="noopener">
-              <img src="https://tnc-kao.com.tw/images/items/img_booking.png" alt="">
-              <h3>我的訂單</h3>
-              <p>查詢 / 付款票券</p>
+        <!-- 快速功能 -->
+        <div class="section-block">
+          <div class="section-header">
+            <h2 class="section-title">快速功能</h2>
+          </div>
+          <div class="quick-links">
+            <a href="https://tnc-kao.com.tw/order/code" class="quick-link-item" target="_blank" rel="noopener">
+              <span class="quick-link-icon">🎫</span>
+              <span class="quick-link-label">我的訂單</span>
             </a>
-            <a href="https://tnc-kao.com.tw/transport" class="passenger-item" target="_blank" rel="noopener">
-              <img src="https://tnc-kao.com.tw/images/items/img_car.png" alt="">
-              <h3>預約寄車</h3>
-              <p>申請車輛託運服務</p>
+            <a href="https://tnc-kao.com.tw/transport" class="quick-link-item" target="_blank" rel="noopener">
+              <span class="quick-link-icon">🚗</span>
+              <span class="quick-link-label">預約寄車</span>
             </a>
-            <a href="https://tnc-kao.com.tw/schedule/ticket" class="passenger-item" target="_blank" rel="noopener">
-              <img src="https://tnc-kao.com.tw/images/items/img_search.png" alt="">
-              <h3>票價查詢</h3>
-              <p>票價產品一覽表</p>
+            <a href="https://tnc-kao.com.tw/schedule/ticket" class="quick-link-item" target="_blank" rel="noopener">
+              <span class="quick-link-icon">💰</span>
+              <span class="quick-link-label">票價查詢</span>
             </a>
-            <a href="https://tnc-kao.com.tw/guide" class="passenger-item" target="_blank" rel="noopener">
-              <img src="https://tnc-kao.com.tw/images/items/img_guide.png" alt="">
-              <h3>乘船指南</h3>
-              <p>旅客乘船須知事宜</p>
+            <a href="https://tnc-kao.com.tw/guide" class="quick-link-item" target="_blank" rel="noopener">
+              <span class="quick-link-icon">📖</span>
+              <span class="quick-link-label">乘船指南</span>
             </a>
           </div>
-        </section>
+        </div>
 
         <!-- 最新消息 -->
-        <section class="section-block news-section">
-          <p class="section-en">NEWS</p>
-          <h2 class="section-title">最新消息</h2>
+        <section class="section-block">
+          <div class="section-header">
+            <h2 class="section-title">最新消息</h2>
+            <a href="https://tnc-kao.com.tw/news" class="section-more" target="_blank" rel="noopener">更多 ›</a>
+          </div>
           <ul class="news-list">
             <li>
-              <span class="news-date">2026/06/02</span>
-              <a href="https://tnc-kao.com.tw/news/show/197" target="_blank" rel="noopener">115年【6～8月週五夜航限定活動資訊】</a>
+              <a href="https://tnc-kao.com.tw/news/show/197" target="_blank" rel="noopener">
+                <span class="news-date">2026/06/02</span>
+                <span class="news-title">115年【6～8月週五夜航限定活動資訊】</span>
+              </a>
             </li>
             <li>
-              <span class="news-date">2026/05/22</span>
-              <a href="https://tnc-kao.com.tw/news/show/196" target="_blank" rel="noopener">(115)7月1日起澎湖輪修正高雄碼頭服務及收貨作業時間</a>
+              <a href="https://tnc-kao.com.tw/news/show/196" target="_blank" rel="noopener">
+                <span class="news-date">2026/05/22</span>
+                <span class="news-title">7月1日起澎湖輪修正高雄碼頭服務及收貨作業時間</span>
+              </a>
             </li>
             <li>
-              <span class="news-date">2026/03/04</span>
-              <a href="https://tnc-kao.com.tw/news/show/191" target="_blank" rel="noopener">115年度八月份海上實習實務培訓，部份航班不販售頭等艙房</a>
+              <a href="https://tnc-kao.com.tw/news/show/191" target="_blank" rel="noopener">
+                <span class="news-date">2026/03/04</span>
+                <span class="news-title">八月份海上實習實務培訓，部份航班不販售頭等艙房</span>
+              </a>
             </li>
           </ul>
-          <a href="https://tnc-kao.com.tw/news" class="link-more" target="_blank" rel="noopener">更多消息 →</a>
         </section>
 
         <footer class="app-footer">
@@ -231,6 +243,26 @@
       </div>
     </section>
   </div>
+
+  <!-- 底部 Tab Bar -->
+  <nav class="tab-bar">
+    <button class="tab-item active" data-tab="home" data-nav="home">
+      <span class="tab-icon">🏠</span>
+      <span>首頁</span>
+    </button>
+    <button class="tab-item" data-tab="booking" data-nav="home">
+      <span class="tab-icon">🎫</span>
+      <span>訂票</span>
+    </button>
+    <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
+      <span class="tab-icon">📋</span>
+      <span>我的訂單</span>
+    </button>
+    <button class="tab-item" data-tab="more" onclick="document.getElementById('btn-menu').click()">
+      <span class="tab-icon">☰</span>
+      <span>更多</span>
+    </button>
+  </nav>
 
   <script src="app.js"></script>
   <script>
