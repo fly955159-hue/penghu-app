@@ -16,18 +16,19 @@
 <body>
   <div id="app">
 
-    <!-- 頂部導覽列 -->
+    <!-- 頂部 -->
     <header class="app-header">
-      <div class="header-logo">
-        <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="logo">
-        <span class="header-title">澎湖輪</span>
-      </div>
+      <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="logo">
       <div class="header-right">
-        <button class="header-icon-btn" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
-          <span>👤</span>
-        </button>
+        <button class="header-icon-btn">🔔</button>
+        <button class="header-icon-btn">👤</button>
       </div>
     </header>
+
+    <!-- 第二行：功能列 -->
+    <div class="nav-tabs">
+      <button class="nav-tab active">一般訂票</button>
+    </div>
 
     <!-- 首頁 -->
     <section id="page-home" class="page active">
@@ -36,54 +37,96 @@
         <!-- 訂票卡片 -->
         <div class="booking-card">
 
-          <!-- 單程/來回切換 -->
+          <!-- 營運狀態 -->
+          <div class="status-bar">
+            <span class="status-dot"></span>
+            <span class="status-text">正常營運中</span>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <!-- 路線 -->
+          <div class="route-row" id="field-departure" data-nav="route">
+            <div class="route-station">
+              <div class="route-station-label">出發港</div>
+              <div class="route-station-name" id="home-departure">高雄</div>
+            </div>
+            <button class="route-swap-btn">⇄</button>
+            <div class="route-station" style="text-align:right">
+              <div class="route-station-label">目的港</div>
+              <div class="route-station-name" id="home-destination">澎湖</div>
+            </div>
+          </div>
+
+          <!-- 單程/來回 -->
           <div class="trip-tabs">
             <button class="trip-tab active" data-trip="single">單程票</button>
             <button class="trip-tab" data-trip="round">來回票</button>
           </div>
 
-          <!-- 路線 -->
-          <div class="route-row" id="field-departure" data-nav="route">
-            <div class="route-station">
-              <div class="route-station-label">出發地</div>
-              <div class="route-station-name" id="home-departure">高雄</div>
-            </div>
-            <div class="route-swap-btn">⇄</div>
-            <div class="route-station">
-              <div class="route-station-label">目的地</div>
-              <div class="route-station-name" id="home-destination">澎湖</div>
-            </div>
+          <div class="card-divider"></div>
+
+          <!-- 欄位列表 -->
+          <div class="field-list">
+            <button class="field-row" data-nav="date" id="field-date-go">
+              <span class="field-row-icon">📅</span>
+              <div class="field-row-text">
+                <span class="field-row-label">去程日期</span>
+                <span class="field-row-value" id="home-date-go">請選擇日期</span>
+              </div>
+              <span class="field-row-arrow">›</span>
+            </button>
+
+            <div class="field-row-divider"></div>
+
+            <button class="field-row field-round-only hidden" data-nav="date-back" id="field-date-back">
+              <span class="field-row-icon">📅</span>
+              <div class="field-row-text">
+                <span class="field-row-label">回程日期</span>
+                <span class="field-row-value" id="home-date-back">請選擇日期</span>
+              </div>
+              <span class="field-row-arrow">›</span>
+            </button>
+
+            <button class="field-row" data-nav="cabin">
+              <span class="field-row-icon">🚢</span>
+              <div class="field-row-text">
+                <span class="field-row-label">艙等種類</span>
+                <span class="field-row-value">經濟艙</span>
+              </div>
+              <span class="field-row-arrow">›</span>
+            </button>
+
+            <div class="field-row-divider"></div>
+
+            <button class="field-row" data-nav="passengers">
+              <span class="field-row-icon">👤</span>
+              <div class="field-row-text">
+                <span class="field-row-label">乘客人數</span>
+                <span class="field-row-value">大人 1 位</span>
+              </div>
+              <span class="field-row-arrow">›</span>
+            </button>
+
+            <div class="field-row-divider"></div>
+
+            <button class="field-row" data-nav="vehicle">
+              <span class="field-row-icon">🚗</span>
+              <div class="field-row-text">
+                <span class="field-row-label">加購車輛</span>
+                <span class="field-row-value">不加購</span>
+              </div>
+              <span class="field-row-arrow">›</span>
+            </button>
           </div>
 
-          <!-- 日期 -->
-          <button class="field-btn" data-nav="date" id="field-date-go">
-            <span class="field-icon-text">📅</span>
-            <div class="field-text">
-              <span class="field-label">去程日期</span>
-              <span class="field-value" id="home-date-go">請選擇日期</span>
-            </div>
-            <span class="field-arrow">›</span>
-          </button>
-
-          <button class="field-btn field-round-only hidden" data-nav="date-back" id="field-date-back">
-            <span class="field-icon-text">📅</span>
-            <div class="field-text">
-              <span class="field-label">回程日期</span>
-              <span class="field-value" id="home-date-back">請選擇日期</span>
-            </div>
-            <span class="field-arrow">›</span>
-          </button>
-
-          <!-- 加購車輛 -->
-          <label class="vehicle-check">
-            <input type="checkbox" id="add-vehicle">
-            <span>加購車輛託運</span>
-          </label>
+          <div class="card-divider"></div>
 
           <!-- 搜尋按鈕 -->
           <button class="btn btn-primary btn-large" id="btn-search">
             搜尋航班
           </button>
+
         </div>
 
       </div>
@@ -160,24 +203,24 @@
 
   <!-- 底部 Tab Bar -->
   <nav class="tab-bar">
-    <button class="tab-item active" data-nav="home">
+    <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
       <span class="tab-icon">🎫</span>
+      <span>我的車票</span>
+    </button>
+    <button class="tab-item active" data-nav="home">
+      <span class="tab-icon">🔍</span>
       <span>訂票</span>
     </button>
     <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
-      <span class="tab-icon">🎟️</span>
-      <span>我的車票</span>
-    </button>
-    <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
-      <span class="tab-icon">📱</span>
-      <span>電票</span>
-    </button>
-    <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
       <span class="tab-icon">💳</span>
-      <span>付款取票</span>
+      <span>付款/取票</span>
     </button>
     <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
-      <span class="tab-icon">☰</span>
+      <span class="tab-icon">📥</span>
+      <span>載入訂位</span>
+    </button>
+    <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw','_blank')">
+      <span class="tab-icon">•••</span>
       <span>其他</span>
     </button>
   </nav>
