@@ -146,11 +146,21 @@
             <div class="option-card-left">
               <span class="option-icon">💺</span>
               <div class="option-info">
-                <span class="option-name">經濟艙</span>
+                <span class="option-name">經濟座艙</span>
                 <span class="option-hint">一般座位，開放購買</span>
               </div>
             </div>
             <span class="option-check" id="check-economy"></span>
+          </button>
+          <button class="option-card" data-cabin="business">
+            <div class="option-card-left">
+              <span class="option-icon">🪑</span>
+              <div class="option-info">
+                <span class="option-name">商務座艙</span>
+                <span class="option-hint">較寬敞座位</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-business"></span>
           </button>
           <button class="option-card" data-cabin="berth">
             <div class="option-card-left">
@@ -182,6 +192,16 @@
             </div>
             <span class="option-check" id="check-suite"></span>
           </button>
+          <button class="option-card" data-cabin="vip">
+            <div class="option-card-left">
+              <span class="option-icon">💎</span>
+              <div class="option-info">
+                <span class="option-name">VIP艙</span>
+                <span class="option-hint">NT$6,000／間，每間限2人</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-vip"></span>
+          </button>
         </div>
       </div>
     </section>
@@ -209,7 +229,7 @@
           </div>
           <div class="passenger-row">
             <div class="passenger-info">
-              <span class="passenger-name">孩童</span>
+              <span class="passenger-name">兒童票</span>
               <span class="passenger-hint">3歲～未滿12歲</span>
             </div>
             <div class="counter">
@@ -227,6 +247,39 @@
               <button class="counter-btn" data-type="senior" data-action="minus">－</button>
               <span class="counter-val" id="count-senior">0</span>
               <button class="counter-btn" data-type="senior" data-action="plus">＋</button>
+            </div>
+          </div>
+          <div class="passenger-row">
+            <div class="passenger-info">
+              <span class="passenger-name">愛心票／陪同票</span>
+              <span class="passenger-hint">持有效身障手冊</span>
+            </div>
+            <div class="counter">
+              <button class="counter-btn" data-type="disabled" data-action="minus">－</button>
+              <span class="counter-val" id="count-disabled">0</span>
+              <button class="counter-btn" data-type="disabled" data-action="plus">＋</button>
+            </div>
+          </div>
+          <div class="passenger-row">
+            <div class="passenger-info">
+              <span class="passenger-name">澎湖縣民票</span>
+              <span class="passenger-hint">澎湖縣戶籍，需持證件</span>
+            </div>
+            <div class="counter">
+              <button class="counter-btn" data-type="penghu" data-action="minus">－</button>
+              <span class="counter-val" id="count-penghu">0</span>
+              <button class="counter-btn" data-type="penghu" data-action="plus">＋</button>
+            </div>
+          </div>
+          <div class="passenger-row">
+            <div class="passenger-info">
+              <span class="passenger-name">嬰保票</span>
+              <span class="passenger-hint">未滿3歲，NT$100</span>
+            </div>
+            <div class="counter">
+              <button class="counter-btn" data-type="infant" data-action="minus">－</button>
+              <span class="counter-val" id="count-infant">0</span>
+              <button class="counter-btn" data-type="infant" data-action="plus">＋</button>
             </div>
           </div>
         </div>

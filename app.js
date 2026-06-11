@@ -1,29 +1,136 @@
-const DEPARTURES = {
-  kaohsiung: { label: "高雄", dest: "澎湖", route: "高雄 → 澎湖", port: "高雄港" },
-  penghu:    { label: "澎湖", dest: "高雄", route: "澎湖 → 高雄", port: "馬公港" },
-};
-
-// 真實時刻表（來源：tnc-kao.com.tw/schedule/timetable）
-const SCHEDULES = {
-  kaohsiung: [
-    { depart: "09:00", arrive: "13:00", ship: "澎湖輪", duration: "約4小時" },
-    { depart: "23:30", arrive: "03:30", ship: "澎湖輪", duration: "約4小時", note: "隔日抵達" },
-  ],
-  penghu: [
-    { depart: "09:00", arrive: "13:00", ship: "澎湖輪", duration: "約4小時" },
-    { depart: "13:00", arrive: "17:00", ship: "澎湖輪", duration: "約4小時" },
-    { depart: "15:30", arrive: "19:30", ship: "澎湖輪", duration: "約4小時" },
-    { depart: "16:00", arrive: "20:00", ship: "澎湖輪", duration: "約4小時" },
-  ],
-};
-
+// ── 艙等 ──
 const CABINS = {
-  economy: "經濟艙",
-  berth:   "臥鋪艙",
-  first:   "頭等艙",
-  suite:   "特等艙",
+  economy:  { label: "經濟座艙", hint: "一般座位", icon: "💺" },
+  business: { label: "商務座艙", hint: "較寬敞座位", icon: "🪑" },
+  berth:    { label: "臥鋪艙",   hint: "躺臥休息，可單獨購買", icon: "🛏️" },
+  first:    { label: "頭等艙",   hint: "需同時購買4人以上", icon: "⭐" },
+  suite:    { label: "特等艙",   hint: "需同時購買2人以上", icon: "👑" },
+  vip:      { label: "VIP艙",    hint: "NT$6,000／間，每間限2人", icon: "💎" },
 };
 
+// ── 出發地 ──
+const DEPARTURES = {
+  kaohsiung: { label: "高雄", dest: "澎湖", route: "高雄 → 澎湖", port: "高雄港", arrive: "馬公港" },
+  penghu:    { label: "澎湖", dest: "高雄", route: "澎湖 → 高雄", port: "馬公港", arrive: "高雄港" },
+};
+
+// ── 真實船期表（民國115年 = 西元2026年，5～8月）──
+// 格式：{ kao: ["09:00",...], phu: ["16:00",...] }
+// kao = 高雄出發時間，phu = 澎湖出發時間
+const SCHEDULE = {
+  // 5月
+  "2026-05-01": { kao: ["23:30"], phu: [] },
+  "2026-05-02": { kao: [], phu: ["15:30"] },
+  "2026-05-03": { kao: ["09:00"], phu: ["15:30"] },
+  "2026-05-04": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-05-05": { kao: ["09:00"], phu: [] },
+  "2026-05-08": { kao: ["23:30"], phu: ["10:00"] },
+  "2026-05-09": { kao: [], phu: ["10:00"] },
+  "2026-05-10": { kao: ["09:00"], phu: ["15:30"] },
+  "2026-05-11": { kao: ["09:00"], phu: [] },
+  "2026-05-12": { kao: [], phu: ["16:00"] },
+  "2026-05-13": { kao: ["23:30"], phu: [] },
+  "2026-05-14": { kao: [], phu: ["15:30"] },
+  "2026-05-15": { kao: ["09:00"], phu: [] },
+  "2026-05-17": { kao: [], phu: ["09:00"] },
+  "2026-05-18": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-05-19": { kao: ["09:00"], phu: [] },
+  "2026-05-20": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-05-22": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-05-24": { kao: [], phu: ["15:30"] },
+  "2026-05-25": { kao: ["09:00"], phu: [] },
+  "2026-05-26": { kao: [], phu: ["16:00"] },
+  "2026-05-27": { kao: ["23:30"], phu: [] },
+  "2026-05-29": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-05-31": { kao: [], phu: ["15:30"] },
+  // 6月
+  "2026-06-01": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-06-02": { kao: ["09:00"], phu: [] },
+  "2026-06-03": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-06-05": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-06-07": { kao: [], phu: ["15:30"] },
+  "2026-06-08": { kao: ["09:00"], phu: [] },
+  "2026-06-09": { kao: [], phu: ["16:00"] },
+  "2026-06-10": { kao: ["23:30"], phu: [] },
+  "2026-06-12": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-06-14": { kao: [], phu: ["15:30"] },
+  "2026-06-15": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-06-16": { kao: ["09:00"], phu: [] },
+  "2026-06-17": { kao: [], phu: ["09:00"] },
+  "2026-06-18": { kao: ["23:30"], phu: [] },
+  "2026-06-19": { kao: ["23:30"], phu: ["13:00"] },
+  "2026-06-20": { kao: [], phu: ["15:30"] },
+  "2026-06-21": { kao: ["09:00"], phu: ["15:30"] },
+  "2026-06-22": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-06-24": { kao: ["23:30"], phu: [] },
+  "2026-06-26": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-06-28": { kao: [], phu: ["15:30"] },
+  "2026-06-29": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-06-30": { kao: ["09:00"], phu: [] },
+  // 7月
+  "2026-07-01": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-03": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-05": { kao: [], phu: ["15:30"] },
+  "2026-07-06": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-07-07": { kao: ["09:00"], phu: [] },
+  "2026-07-08": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-10": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-12": { kao: [], phu: ["15:30"] },
+  "2026-07-13": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-07-14": { kao: ["09:00"], phu: [] },
+  "2026-07-15": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-17": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-19": { kao: [], phu: ["15:30"] },
+  "2026-07-20": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-07-21": { kao: ["09:00"], phu: [] },
+  "2026-07-22": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-24": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-26": { kao: [], phu: ["15:30"] },
+  "2026-07-27": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-07-28": { kao: ["09:00"], phu: [] },
+  "2026-07-29": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-07-31": { kao: ["23:30"], phu: ["09:00"] },
+  // 8月
+  "2026-08-02": { kao: [], phu: ["15:30"] },
+  "2026-08-03": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-08-04": { kao: ["09:00"], phu: [] },
+  "2026-08-05": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-07": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-09": { kao: [], phu: ["15:30"] },
+  "2026-08-10": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-08-11": { kao: ["09:00"], phu: [] },
+  "2026-08-12": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-14": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-16": { kao: [], phu: ["15:30"] },
+  "2026-08-17": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-08-18": { kao: ["09:00"], phu: [] },
+  "2026-08-19": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-21": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-23": { kao: [], phu: ["15:30"] },
+  "2026-08-24": { kao: ["09:00"], phu: ["16:00"] },
+  "2026-08-25": { kao: ["09:00"], phu: [] },
+  "2026-08-26": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-28": { kao: ["23:30"], phu: ["09:00"] },
+  "2026-08-30": { kao: [], phu: ["15:30"] },
+  "2026-08-31": { kao: ["09:00"], phu: [] },
+};
+
+// ── 票價（高雄出發單程，澎湖方向相同）──
+const PRICES = {
+  suite:    { adult: 1700, child: 850,  senior: 850, disabled: 850, penghu: 1190, infant: 0 },
+  first:    { adult: 1300, child: 650,  senior: 650, disabled: 650, penghu: 910,  infant: 0 },
+  berth:    { adult: 980,  child: 490,  senior: 490, disabled: 490, penghu: 686,  infant: 100 },
+  business: { adult: 980,  child: 490,  senior: 490, disabled: 490, penghu: 686,  infant: 0 },
+  economy:  { adult: 860,  child: 430,  senior: 430, disabled: 430, penghu: 602,  infant: 0 },
+  vip:      { adult: 6000, child: 6000, senior: 6000, disabled: 6000, penghu: 6000, infant: 0 },
+};
+
+const TICKET_LABELS = {
+  adult: "全票", child: "兒童票", senior: "敬老票",
+  disabled: "愛心票", penghu: "澎湖縣民票", infant: "嬰保票",
+};
+
+// ── 狀態 ──
 const state = {
   tripType: "single",
   departure: "kaohsiung",
@@ -31,7 +138,7 @@ const state = {
   dateBack: null,
   dateTarget: "go",
   cabin: "economy",
-  passengers: { adult: 1, child: 0, senior: 0 },
+  passengers: { adult: 1, child: 0, senior: 0, disabled: 0, penghu: 0, infant: 0 },
 };
 
 // ── 工具函式 ──
@@ -59,10 +166,9 @@ function showPage(pageId) {
   });
 }
 
-// ── 更新首頁顯示 ──
+// ── 更新首頁 ──
 function updateHomeFields() {
   const dep = DEPARTURES[state.departure];
-
   document.getElementById("home-departure").textContent = dep.label;
   document.getElementById("home-destination").textContent = dep.dest;
 
@@ -81,6 +187,31 @@ function updateTripTabs() {
   document.querySelectorAll(".trip-tab").forEach(tab => {
     tab.classList.toggle("active", tab.dataset.trip === state.tripType);
   });
+}
+
+// ── 更新艙等顯示 ──
+function updateCabinField() {
+  document.querySelectorAll(".option-card[data-cabin]").forEach(card => {
+    const check = card.querySelector(".option-check");
+    if (check) check.textContent = card.dataset.cabin === state.cabin ? "✓" : "";
+  });
+  const el = document.querySelector("#field-cabin .field-row-value");
+  if (el) el.textContent = CABINS[state.cabin].label;
+}
+
+// ── 更新乘客顯示 ──
+function updatePassengersField() {
+  Object.keys(state.passengers).forEach(type => {
+    const el = document.getElementById(`count-${type}`);
+    if (el) el.textContent = state.passengers[type];
+  });
+
+  const parts = [];
+  Object.entries(state.passengers).forEach(([type, count]) => {
+    if (count > 0) parts.push(`${TICKET_LABELS[type]} ${count}`);
+  });
+  const el = document.querySelector("#field-passengers .field-row-value");
+  if (el) el.textContent = parts.length ? parts.join("、") : "請選擇人數";
 }
 
 // ── 開啟日期頁 ──
@@ -125,34 +256,76 @@ function searchFlights() {
   if (state.tripType === "round" && !state.dateBack) { openDatePage("back"); return; }
 
   const dep = DEPARTURES[state.departure];
-  let summary = `航程：${dep.route}　去程：${formatDateZh(state.dateGo)}`;
+  const cabin = CABINS[state.cabin];
+
+  // 計算票價
+  const prices = PRICES[state.cabin];
+  let totalNote = "";
+  if (state.cabin === "vip") {
+    totalNote = "VIP艙 NT$6,000／間（每間限2人）";
+  } else {
+    const parts = [];
+    Object.entries(state.passengers).forEach(([type, count]) => {
+      if (count > 0 && prices[type] > 0) {
+        parts.push(`${TICKET_LABELS[type]}×${count} NT$${prices[type] * count}`);
+      } else if (count > 0 && type === "infant") {
+        parts.push(`嬰保票×${count} NT$100`);
+      }
+    });
+    if (parts.length) totalNote = parts.join("　");
+  }
+
+  let summary = `${dep.route}　去程：${formatDateZh(state.dateGo)}\n艙等：${cabin.label}`;
   if (state.tripType === "round" && state.dateBack) {
     summary += `　回程：${formatDateZh(state.dateBack)}`;
   }
 
   const summaryEl = document.getElementById("search-summary");
-  if (summaryEl) summaryEl.textContent = summary;
+  if (summaryEl) summaryEl.innerHTML = summary.replace("\n","<br>") + (totalNote ? `<br><span style="color:#163bc0;font-weight:600">${totalNote}</span>` : "");
+
+  // 查詢班次
+  const direction = state.departure === "kaohsiung" ? "kao" : "phu";
+  const dayData = SCHEDULE[state.dateGo];
+  const times = dayData ? dayData[direction] : [];
 
   const list = document.getElementById("flight-list");
-  const flights = SCHEDULES[state.departure] || [];
   if (list) {
-    list.innerHTML = flights.map(f => `
-      <div class="flight-card">
-        <div class="flight-time">
-          <span class="time">${f.depart}</span>
-          <span class="arrow">→</span>
-          <span class="time">${f.arrive}</span>
-        </div>
-        <div class="flight-meta">
-          <span>${dep.port} → ${dep.dest}　${f.duration}</span>
-          <span>${f.ship}${f.note ? '　⚠️ ' + f.note : ''}</span>
-        </div>
-        <a href="https://tnc-kao.com.tw/booking" class="btn btn-primary" target="_blank" rel="noopener"
-           style="display:block;padding:12px;text-align:center;border-radius:8px;margin-top:12px;text-decoration:none;">
-          前往官網訂票
-        </a>
-      </div>
-    `).join("");
+    if (times.length === 0) {
+      list.innerHTML = `
+        <div class="no-flight-card">
+          <div class="no-flight-icon">⚓</div>
+          <div class="no-flight-text">本日無班次</div>
+          <div class="no-flight-hint">請選擇其他日期，或以現場公告為準</div>
+        </div>`;
+    } else {
+      list.innerHTML = times.map(t => {
+        const [h, m] = t.split(":");
+        const arrHour = (parseInt(h) + 4) % 24;
+        const arrTime = `${String(arrHour).padStart(2,"0")}:${m}`;
+        const nextDay = parseInt(h) >= 21 ? "（翌日抵達）" : "";
+        return `
+          <div class="flight-card">
+            <div class="flight-time">
+              <div class="flight-port">
+                <span class="port-name">${dep.port}</span>
+                <span class="time">${t}</span>
+              </div>
+              <div class="flight-arrow">→<br><span class="duration">約4小時</span></div>
+              <div class="flight-port" style="text-align:right">
+                <span class="port-name">${dep.arrive}</span>
+                <span class="time">${arrTime}${nextDay}</span>
+              </div>
+            </div>
+            <div class="flight-meta">
+              <span>澎湖輪　${cabin.label}</span>
+            </div>
+            <a href="https://tnc-kao.com.tw/booking" class="btn btn-primary" target="_blank" rel="noopener"
+               style="display:block;padding:12px;text-align:center;border-radius:8px;margin-top:12px;text-decoration:none;">
+              前往官網訂票
+            </a>
+          </div>`;
+      }).join("");
+    }
   }
 
   showPage("results");
@@ -160,7 +333,7 @@ function searchFlights() {
 
 // ── 事件綁定 ──
 
-// 單程/來回切換
+// 單程/來回
 document.querySelectorAll(".trip-tab").forEach(tab => {
   tab.addEventListener("click", () => {
     state.tripType = tab.dataset.trip;
@@ -177,11 +350,11 @@ if (fieldDateGo) fieldDateGo.addEventListener("click", () => openDatePage("go"))
 const fieldDateBack = document.getElementById("field-date-back");
 if (fieldDateBack) fieldDateBack.addEventListener("click", () => openDatePage("back"));
 
-// 出發地切換（route-row）
+// 出發地
 const fieldDeparture = document.getElementById("field-departure");
 if (fieldDeparture) fieldDeparture.addEventListener("click", () => showPage("route"));
 
-// 路線卡片選擇
+// 路線卡片
 document.querySelectorAll(".route-card").forEach(card => {
   card.addEventListener("click", () => {
     state.departure = card.dataset.departure;
@@ -190,7 +363,7 @@ document.querySelectorAll(".route-card").forEach(card => {
   });
 });
 
-// 日期輸入改變
+// 日期輸入
 const departureDateInput = document.getElementById("departure-date");
 if (departureDateInput) {
   departureDateInput.addEventListener("change", e => {
@@ -207,55 +380,13 @@ if (btnDateConfirm) btnDateConfirm.addEventListener("click", confirmDate);
 const btnSearch = document.getElementById("btn-search");
 if (btnSearch) btnSearch.addEventListener("click", searchFlights);
 
-// 返回按鈕
-document.querySelectorAll(".btn-back").forEach(btn => {
-  btn.addEventListener("click", () => showPage("home"));
-});
-
-// Tab Bar 訂票按鈕
-document.querySelectorAll(".tab-item[data-nav]").forEach(tab => {
-  tab.addEventListener("click", () => showPage("home"));
-});
-
-// ── 更新艙等顯示 ──
-function updateCabinField() {
-  document.querySelectorAll(".option-card").forEach(card => {
-    const check = card.querySelector(".option-check");
-    if (check) check.textContent = card.dataset.cabin === state.cabin ? "✓" : "";
-  });
-  const el = document.querySelector("#field-cabin .field-row-value");
-  if (el) el.textContent = CABINS[state.cabin];
-}
-
-// ── 更新乘客顯示 ──
-function updatePassengersField() {
-  ["adult","child","senior"].forEach(type => {
-    const el = document.getElementById(`count-${type}`);
-    if (el) el.textContent = state.passengers[type];
-  });
-  const total = state.passengers.adult + state.passengers.child + state.passengers.senior;
-  const el = document.querySelector("#field-passengers .field-row-value");
-  if (el) {
-    let text = `大人 ${state.passengers.adult} 位`;
-    if (state.passengers.child > 0) text += `，孩童 ${state.passengers.child} 位`;
-    if (state.passengers.senior > 0) text += `，敬老 ${state.passengers.senior} 位`;
-    el.textContent = text;
-  }
-}
-
 // 艙等按鈕
 const fieldCabin = document.getElementById("field-cabin");
-if (fieldCabin) fieldCabin.addEventListener("click", () => {
-  updateCabinField();
-  showPage("cabin");
-});
+if (fieldCabin) fieldCabin.addEventListener("click", () => { updateCabinField(); showPage("cabin"); });
 
 // 乘客人數按鈕
 const fieldPassengers = document.getElementById("field-passengers");
-if (fieldPassengers) fieldPassengers.addEventListener("click", () => {
-  updatePassengersField();
-  showPage("passengers");
-});
+if (fieldPassengers) fieldPassengers.addEventListener("click", () => { updatePassengersField(); showPage("passengers"); });
 
 // 艙等卡片點選
 document.querySelectorAll(".option-card[data-cabin]").forEach(card => {
@@ -271,10 +402,10 @@ document.querySelectorAll(".counter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const type = btn.dataset.type;
     const action = btn.dataset.action;
+    const min = type === "adult" ? 1 : 0;
     if (action === "plus") {
       state.passengers[type]++;
     } else {
-      const min = type === "adult" ? 1 : 0;
       if (state.passengers[type] > min) state.passengers[type]--;
     }
     updatePassengersField();
@@ -286,6 +417,16 @@ const btnPassengersConfirm = document.getElementById("btn-passengers-confirm");
 if (btnPassengersConfirm) btnPassengersConfirm.addEventListener("click", () => {
   updatePassengersField();
   showPage("home");
+});
+
+// 返回按鈕
+document.querySelectorAll(".btn-back").forEach(btn => {
+  btn.addEventListener("click", () => showPage("home"));
+});
+
+// Tab Bar
+document.querySelectorAll(".tab-item[data-nav]").forEach(tab => {
+  tab.addEventListener("click", () => showPage("home"));
 });
 
 // ── 初始化 ──
