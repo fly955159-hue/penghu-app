@@ -214,7 +214,55 @@ function updatePassengersField() {
   if (el) el.textContent = parts.length ? parts.join("、") : "請選擇人數";
 }
 
-// ── 開啟日期頁 ──
+// ── 日曆 ──
+let calYear = 0, calMonth = 0, calSelected = null, calMin = "", calMax = "";
+
+function renderCalendar() {
+  const title = document.getElementById("cal-title");
+  const grid = document.getElementById("cal-grid");
+  if (!title || !grid) return;
+
+  title.textContent = `${calYear}年 ${calMonth + 1}月`;
+
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const todayStr = getTodayStr();
+  const direction = state.departure === "kaohsiung" ? "kao" : "phu";
+
+  let html = "";
+  for (let i = 0; i < firstDay; i++) html += `<span class="cal-day empty"></span>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calYear}-${String(calMonth + 1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const dow = new Date(calYear, calMonth, d).getDay();
+    const isDisabled = dateStr < calMin || dateStr > calMax;
+    const isToday = dateStr === todayStr;
+    const isSelected = dateStr === calSelected;
+    const dayData = SCHEDULE[dateStr];
+    const hasVoyage = dayData && dayData[direction] && dayData[direction].length > 0;
+
+    let cls = "cal-day";
+    if (dow === 0) cls += " sunday";
+    if (dow === 6) cls += " saturday";
+    if (isToday) cls += " today";
+    if (isSelected) cls += " selected";
+    if (isDisabled) cls += " disabled";
+    if (hasVoyage) cls += " has-voyage";
+
+    html += `<button class="${cls}" data-date="${dateStr}">${d}</button>`;
+  }
+  grid.innerHTML = html;
+
+  grid.querySelectorAll(".cal-day[data-date]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      calSelected = btn.dataset.date;
+      const confirmBtn = document.getElementById("btn-date-confirm");
+      if (confirmBtn) confirmBtn.disabled = false;
+      renderCalendar();
+    });
+  });
+}
+
 function openDatePage(target) {
   state.dateTarget = target;
   const isBack = target === "back";
@@ -225,20 +273,38 @@ function openDatePage(target) {
   const bannerEl = document.getElementById("date-route-banner");
   if (bannerEl) bannerEl.textContent = DEPARTURES[state.departure].route;
 
-  const input = document.getElementById("departure-date");
-  input.min = isBack && state.dateGo ? state.dateGo : getTodayStr();
-  input.max = getMaxDateStr();
-  input.value = isBack ? (state.dateBack || "") : (state.dateGo || "");
+  calMin = isBack && state.dateGo ? state.dateGo : getTodayStr();
+  calMax = getMaxDateStr();
+  calSelected = isBack ? (state.dateBack || null) : (state.dateGo || null);
+
+  const initDate = calSelected ? new Date(calSelected + "T00:00:00") : new Date();
+  calYear = initDate.getFullYear();
+  calMonth = initDate.getMonth();
 
   const confirmBtn = document.getElementById("btn-date-confirm");
-  if (confirmBtn) confirmBtn.disabled = !input.value;
+  if (confirmBtn) confirmBtn.disabled = !calSelected;
+
+  renderCalendar();
+
+  const prevBtn = document.getElementById("cal-prev");
+  const nextBtn = document.getElementById("cal-next");
+  if (prevBtn) prevBtn.onclick = () => {
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  };
+  if (nextBtn) nextBtn.onclick = () => {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+  };
 
   showPage("date");
 }
 
 // ── 確認日期 ──
 function confirmDate() {
-  const value = document.getElementById("departure-date").value;
+  const value = calSelected;
   if (!value) return;
   if (state.dateTarget === "back") {
     state.dateBack = value;
@@ -362,15 +428,6 @@ document.querySelectorAll(".route-card").forEach(card => {
     showPage("home");
   });
 });
-
-// 日期輸入
-const departureDateInput = document.getElementById("departure-date");
-if (departureDateInput) {
-  departureDateInput.addEventListener("change", e => {
-    const confirmBtn = document.getElementById("btn-date-confirm");
-    if (confirmBtn) confirmBtn.disabled = !e.target.value;
-  });
-}
 
 // 確認日期
 const btnDateConfirm = document.getElementById("btn-date-confirm");

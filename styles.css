@@ -377,28 +377,99 @@ a { color: var(--blue); text-decoration: none; }
   text-align: center;
 }
 
-/* Date Picker */
-.date-picker-wrap { margin-bottom: 16px; }
-
-.date-input {
-  width: 100%;
-  padding: 16px;
-  font-size: 1.125rem;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
+/* ── Custom Calendar ── */
+.cal-card {
   background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  margin-bottom: 12px;
+}
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cal-title {
+  font-size: 1rem;
+  font-weight: 700;
   color: var(--text);
+}
+
+.cal-nav {
+  width: 36px; height: 36px;
+  border: none; background: var(--bg);
+  border-radius: 50%;
+  font-size: 1.3rem; color: var(--text);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
   font-family: inherit;
 }
-.date-input:focus { outline: none; border-color: var(--blue); }
+.cal-nav:active { background: var(--border); }
 
-.calendar-hint {
-  background: var(--blue-light);
-  padding: 14px 16px;
-  border-radius: var(--radius);
-  margin-bottom: 24px;
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
 }
-.calendar-hint p { font-size: 0.8125rem; color: var(--text-sub); line-height: 1.8; }
+.cal-weekdays span {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  padding: 4px 0;
+}
+.cal-weekdays .sun { color: #e53e3e; }
+.cal-weekdays .sat { color: var(--blue); }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: var(--text);
+  position: relative;
+}
+.cal-day:active { background: var(--bg); }
+.cal-day.sunday { color: #e53e3e; }
+.cal-day.saturday { color: var(--blue); }
+.cal-day.today { border: 2px solid var(--blue); font-weight: 700; }
+.cal-day.selected { background: var(--blue); color: #fff !important; font-weight: 700; border: none; }
+.cal-day.disabled { color: #ccc; cursor: default; pointer-events: none; }
+.cal-day.empty { pointer-events: none; }
+.cal-day.has-voyage::after {
+  content: '';
+  width: 4px; height: 4px;
+  background: #22c55e;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 3px;
+  left: 50%; transform: translateX(-50%);
+}
+.cal-day.selected.has-voyage::after { background: rgba(255,255,255,0.7); }
+
+.cal-hint {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  padding: 8px 4px;
+  line-height: 1.6;
+}
 
 /* Flight Results */
 .search-summary {

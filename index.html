@@ -337,17 +337,23 @@
         <h2 id="date-page-title">選擇去程日期</h2>
         <div class="header-spacer"></div>
       </header>
-      <div class="page-content">
+      <div class="page-content" style="padding:12px 16px">
         <div class="selected-route-banner" id="date-route-banner"></div>
-        <div class="date-picker-wrap">
-          <input type="date" id="departure-date" class="date-input" aria-label="出發日期">
+        <div class="cal-card">
+          <div class="cal-header">
+            <button class="cal-nav" id="cal-prev">‹</button>
+            <span class="cal-title" id="cal-title"></span>
+            <button class="cal-nav" id="cal-next">›</button>
+          </div>
+          <div class="cal-weekdays">
+            <span class="sun">日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span class="sat">六</span>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
         </div>
-        <div class="calendar-hint">
-          <p>📌 訂票開放：開航前 56 天起至開航前 4 小時止</p>
-          <p>📌 開航前 30 分鐘停止售票</p>
-          <p>📌 船期受天候影響，請以官網公告為準</p>
+        <div class="cal-hint">
+          <span>📌 開放訂票：出發前 56 天起，開航前 4 小時止</span>
         </div>
-        <button class="btn btn-primary btn-large" id="btn-date-confirm" disabled>
+        <button class="btn btn-primary btn-large" id="btn-date-confirm" disabled style="border-radius:12px;margin-top:12px;">
           確認日期
         </button>
       </div>
