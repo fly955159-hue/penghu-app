@@ -293,12 +293,7 @@ function renderTimeSlots() {
     const isSelected = t === calSelectedTime;
     return `
       <button class="time-slot${isSelected ? " selected" : ""}" data-time="${t}">
-        <div class="time-slot-depart">${t}</div>
-        <div class="time-slot-arrow">→</div>
-        <div class="time-slot-arrive">
-          <span>${arrTime}</span>
-          <span class="time-slot-note">${nextDay}抵達</span>
-        </div>
+        <div class="time-slot-depart">${t} 出發</div>
       </button>`;
   }).join("");
 
