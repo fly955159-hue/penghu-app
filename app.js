@@ -3,10 +3,19 @@ const DEPARTURES = {
   penghu:    { label: "澎湖", dest: "高雄", route: "澎湖 → 高雄", port: "馬公港" },
 };
 
-const MOCK_FLIGHTS = [
-  { depart: "08:00", arrive: "12:00", ship: "澎湖輪", seats: "充足" },
-  { depart: "14:00", arrive: "18:00", ship: "澎湖輪", seats: "少量" },
-];
+// 真實時刻表（來源：tnc-kao.com.tw/schedule/timetable）
+const SCHEDULES = {
+  kaohsiung: [
+    { depart: "09:00", arrive: "13:00", ship: "澎湖輪", duration: "約4小時" },
+    { depart: "23:30", arrive: "03:30", ship: "澎湖輪", duration: "約4小時", note: "隔日抵達" },
+  ],
+  penghu: [
+    { depart: "09:00", arrive: "13:00", ship: "澎湖輪", duration: "約4小時" },
+    { depart: "13:00", arrive: "17:00", ship: "澎湖輪", duration: "約4小時" },
+    { depart: "15:30", arrive: "19:30", ship: "澎湖輪", duration: "約4小時" },
+    { depart: "16:00", arrive: "20:00", ship: "澎湖輪", duration: "約4小時" },
+  ],
+};
 
 const state = {
   tripType: "single",
@@ -116,8 +125,9 @@ function searchFlights() {
   if (summaryEl) summaryEl.textContent = summary;
 
   const list = document.getElementById("flight-list");
+  const flights = SCHEDULES[state.departure] || [];
   if (list) {
-    list.innerHTML = MOCK_FLIGHTS.map(f => `
+    list.innerHTML = flights.map(f => `
       <div class="flight-card">
         <div class="flight-time">
           <span class="time">${f.depart}</span>
@@ -125,11 +135,11 @@ function searchFlights() {
           <span class="time">${f.arrive}</span>
         </div>
         <div class="flight-meta">
-          <span>${dep.port} → ${dep.dest}</span>
-          <span>${f.ship} · 座位${f.seats}</span>
+          <span>${dep.port} → ${dep.dest}　${f.duration}</span>
+          <span>${f.ship}${f.note ? '　⚠️ ' + f.note : ''}</span>
         </div>
         <a href="https://tnc-kao.com.tw/booking" class="btn btn-primary" target="_blank" rel="noopener"
-           style="display:block;padding:12px;text-align:center;border-radius:8px;margin-top:12px;">
+           style="display:block;padding:12px;text-align:center;border-radius:8px;margin-top:12px;text-decoration:none;">
           前往官網訂票
         </a>
       </div>
