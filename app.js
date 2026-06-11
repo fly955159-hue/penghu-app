@@ -137,6 +137,8 @@ const state = {
   dateGo: null,
   dateBack: null,
   dateTarget: "go",
+  timeGo: null,
+  timeBack: null,
   cabin: "economy",
   passengers: { adult: 1, child: 0, senior: 0, disabled: 0, companion: 0, penghu: 0, infant: 0 },
 };
@@ -215,7 +217,7 @@ function updatePassengersField() {
 }
 
 // ── 日曆 ──
-let calYear = 0, calMonth = 0, calSelected = null, calMin = "", calMax = "";
+let calYear = 0, calMonth = 0, calSelected = null, calMin = "", calMax = "", calSelectedTime = null;
 
 function renderCalendar() {
   const title = document.getElementById("cal-title");
@@ -256,11 +258,59 @@ function renderCalendar() {
   grid.querySelectorAll(".cal-day[data-date]").forEach(btn => {
     btn.addEventListener("click", () => {
       calSelected = btn.dataset.date;
-      const confirmBtn = document.getElementById("btn-date-confirm");
-      if (confirmBtn) confirmBtn.disabled = false;
+      calSelectedTime = null;
       renderCalendar();
+      renderTimeSlots();
     });
   });
+}
+
+function renderTimeSlots() {
+  const wrap = document.getElementById("time-slots-wrap");
+  const slotsEl = document.getElementById("time-slots");
+  const confirmBtn = document.getElementById("btn-date-confirm");
+  if (!wrap || !slotsEl) return;
+
+  if (!calSelected) { wrap.classList.add("hidden"); return; }
+
+  const direction = state.departure === "kaohsiung" ? "kao" : "phu";
+  const dayData = SCHEDULE[calSelected];
+  const times = dayData ? dayData[direction] : [];
+
+  if (times.length === 0) {
+    wrap.classList.remove("hidden");
+    slotsEl.innerHTML = `<div class="no-time-slot">本日無班次，請選擇其他日期</div>`;
+    if (confirmBtn) confirmBtn.disabled = true;
+    return;
+  }
+
+  wrap.classList.remove("hidden");
+  slotsEl.innerHTML = times.map(t => {
+    const [h, m] = t.split(":");
+    const arrHour = (parseInt(h) + 4) % 24;
+    const arrTime = `${String(arrHour).padStart(2,"0")}:${m}`;
+    const nextDay = parseInt(h) >= 21 ? " 翌日" : "";
+    const isSelected = t === calSelectedTime;
+    return `
+      <button class="time-slot${isSelected ? " selected" : ""}" data-time="${t}">
+        <div class="time-slot-depart">${t}</div>
+        <div class="time-slot-arrow">→</div>
+        <div class="time-slot-arrive">
+          <span>${arrTime}</span>
+          <span class="time-slot-note">${nextDay}抵達</span>
+        </div>
+      </button>`;
+  }).join("");
+
+  slotsEl.querySelectorAll(".time-slot[data-time]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      calSelectedTime = btn.dataset.time;
+      if (confirmBtn) confirmBtn.disabled = false;
+      renderTimeSlots();
+    });
+  });
+
+  if (confirmBtn) confirmBtn.disabled = !calSelectedTime;
 }
 
 function openDatePage(target) {
@@ -281,10 +331,10 @@ function openDatePage(target) {
   calYear = initDate.getFullYear();
   calMonth = initDate.getMonth();
 
-  const confirmBtn = document.getElementById("btn-date-confirm");
-  if (confirmBtn) confirmBtn.disabled = !calSelected;
+  calSelectedTime = null;
 
   renderCalendar();
+  renderTimeSlots();
 
   const prevBtn = document.getElementById("cal-prev");
   const nextBtn = document.getElementById("cal-next");
@@ -308,9 +358,11 @@ function confirmDate() {
   if (!value) return;
   if (state.dateTarget === "back") {
     state.dateBack = value;
+    state.timeBack = calSelectedTime;
   } else {
     state.dateGo = value;
-    if (state.dateBack && state.dateBack < value) state.dateBack = null;
+    state.timeGo = calSelectedTime;
+    if (state.dateBack && state.dateBack < value) { state.dateBack = null; state.timeBack = null; }
   }
   updateHomeFields();
   showPage("home");

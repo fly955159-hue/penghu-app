@@ -464,6 +464,48 @@ a { color: var(--blue); text-decoration: none; }
 }
 .cal-day.selected.has-voyage::after { background: rgba(255,255,255,0.7); }
 
+/* ── Time Slots ── */
+.time-slots-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin: 16px 0 10px;
+}
+
+.time-slots { display: flex; flex-direction: column; gap: 10px; margin-bottom: 4px; }
+
+.time-slot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+.time-slot.selected { border-color: var(--blue); background: var(--blue-light); }
+.time-slot:active { background: var(--blue-light); }
+
+.time-slot-depart { font-size: 1.375rem; font-weight: 700; color: var(--text); min-width: 52px; }
+.time-slot-arrow { font-size: 1rem; color: var(--blue); font-weight: 700; flex: 1; text-align: center; }
+.time-slot-arrive { display: flex; flex-direction: column; align-items: flex-end; }
+.time-slot-arrive span:first-child { font-size: 1.375rem; font-weight: 700; color: var(--text); }
+.time-slot-note { font-size: 0.75rem; color: var(--text-sub); }
+
+.no-time-slot {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 0.9rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+}
+
 .cal-hint {
   font-size: 0.8rem;
   color: var(--text-sub);
