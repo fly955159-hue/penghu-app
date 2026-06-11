@@ -88,7 +88,7 @@
               <span class="field-row-arrow">›</span>
             </button>
 
-            <button class="field-row" data-nav="cabin">
+            <button class="field-row" id="field-cabin">
               <span class="field-row-icon">🚢</span>
               <div class="field-row-text">
                 <span class="field-row-label">艙等種類</span>
@@ -99,7 +99,7 @@
 
             <div class="field-row-divider"></div>
 
-            <button class="field-row" data-nav="passengers">
+            <button class="field-row" id="field-passengers">
               <span class="field-row-icon">👤</span>
               <div class="field-row-text">
                 <span class="field-row-label">乘客人數</span>
@@ -129,6 +129,110 @@
 
         </div>
 
+      </div>
+    </section>
+
+    <!-- 選擇艙等 -->
+    <section id="page-cabin" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home">‹</button>
+        <h2>選擇艙等</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <p class="section-label">請選擇艙等種類</p>
+        <div class="option-cards">
+          <button class="option-card" data-cabin="economy">
+            <div class="option-card-left">
+              <span class="option-icon">💺</span>
+              <div class="option-info">
+                <span class="option-name">經濟艙</span>
+                <span class="option-hint">一般座位，開放購買</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-economy"></span>
+          </button>
+          <button class="option-card" data-cabin="berth">
+            <div class="option-card-left">
+              <span class="option-icon">🛏️</span>
+              <div class="option-info">
+                <span class="option-name">臥鋪艙</span>
+                <span class="option-hint">躺臥休息，可單獨購買</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-berth"></span>
+          </button>
+          <button class="option-card" data-cabin="first">
+            <div class="option-card-left">
+              <span class="option-icon">⭐</span>
+              <div class="option-info">
+                <span class="option-name">頭等艙</span>
+                <span class="option-hint">需同時購買4人以上</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-first"></span>
+          </button>
+          <button class="option-card" data-cabin="suite">
+            <div class="option-card-left">
+              <span class="option-icon">👑</span>
+              <div class="option-info">
+                <span class="option-name">特等艙</span>
+                <span class="option-hint">需同時購買2人以上</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-suite"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 乘客人數 -->
+    <section id="page-passengers" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home">‹</button>
+        <h2>乘客人數</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <p class="section-label">請選擇乘客人數</p>
+        <div class="passenger-list">
+          <div class="passenger-row">
+            <div class="passenger-info">
+              <span class="passenger-name">全票</span>
+              <span class="passenger-hint">12歲以上</span>
+            </div>
+            <div class="counter">
+              <button class="counter-btn" data-type="adult" data-action="minus">－</button>
+              <span class="counter-val" id="count-adult">1</span>
+              <button class="counter-btn" data-type="adult" data-action="plus">＋</button>
+            </div>
+          </div>
+          <div class="passenger-row">
+            <div class="passenger-info">
+              <span class="passenger-name">孩童</span>
+              <span class="passenger-hint">3歲～未滿12歲</span>
+            </div>
+            <div class="counter">
+              <button class="counter-btn" data-type="child" data-action="minus">－</button>
+              <span class="counter-val" id="count-child">0</span>
+              <button class="counter-btn" data-type="child" data-action="plus">＋</button>
+            </div>
+          </div>
+          <div class="passenger-row">
+            <div class="passenger-info">
+              <span class="passenger-name">敬老票</span>
+              <span class="passenger-hint">65歲以上本國籍</span>
+            </div>
+            <div class="counter">
+              <button class="counter-btn" data-type="senior" data-action="minus">－</button>
+              <span class="counter-val" id="count-senior">0</span>
+              <button class="counter-btn" data-type="senior" data-action="plus">＋</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-large" id="btn-passengers-confirm" style="border-radius:12px;margin-top:24px;">
+          確認人數
+        </button>
       </div>
     </section>
 

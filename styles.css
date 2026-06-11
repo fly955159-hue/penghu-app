@@ -436,6 +436,58 @@ a { color: var(--blue); text-decoration: none; }
   margin-bottom: 14px;
 }
 
+/* ── Option Cards (艙等) ── */
+.option-cards { display: flex; flex-direction: column; gap: 10px; }
+
+.option-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 16px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+.option-card:active { border-color: var(--blue); background: var(--blue-light); }
+.option-card-left { display: flex; align-items: center; gap: 14px; }
+.option-icon { font-size: 1.5rem; }
+.option-name { display: block; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.option-hint { display: block; font-size: 0.8rem; color: var(--text-sub); }
+.option-check { font-size: 1.2rem; color: var(--blue); font-weight: 700; width: 24px; text-align: center; }
+
+/* ── Passenger Counter ── */
+.passenger-list { display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius); overflow: hidden; border: 1.5px solid var(--border); }
+
+.passenger-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.passenger-row:last-child { border-bottom: none; }
+.passenger-info { display: flex; flex-direction: column; gap: 2px; }
+.passenger-name { font-size: 1rem; font-weight: 600; color: var(--text); }
+.passenger-hint { font-size: 0.8rem; color: var(--text-sub); }
+.counter { display: flex; align-items: center; gap: 16px; }
+.counter-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--blue);
+  font-size: 1.1rem; font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit;
+}
+.counter-btn:active { background: var(--blue-light); }
+.counter-val { font-size: 1.125rem; font-weight: 700; color: var(--text); min-width: 20px; text-align: center; }
+
 .confirm-note {
   font-size: 0.8125rem;
   color: var(--text-sub);

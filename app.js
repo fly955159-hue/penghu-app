@@ -17,12 +17,21 @@ const SCHEDULES = {
   ],
 };
 
+const CABINS = {
+  economy: "經濟艙",
+  berth:   "臥鋪艙",
+  first:   "頭等艙",
+  suite:   "特等艙",
+};
+
 const state = {
   tripType: "single",
   departure: "kaohsiung",
   dateGo: null,
   dateBack: null,
   dateTarget: "go",
+  cabin: "economy",
+  passengers: { adult: 1, child: 0, senior: 0 },
 };
 
 // ── 工具函式 ──
@@ -208,6 +217,79 @@ document.querySelectorAll(".tab-item[data-nav]").forEach(tab => {
   tab.addEventListener("click", () => showPage("home"));
 });
 
+// ── 更新艙等顯示 ──
+function updateCabinField() {
+  document.querySelectorAll(".option-card").forEach(card => {
+    const check = card.querySelector(".option-check");
+    if (check) check.textContent = card.dataset.cabin === state.cabin ? "✓" : "";
+  });
+  const el = document.querySelector("#field-cabin .field-row-value");
+  if (el) el.textContent = CABINS[state.cabin];
+}
+
+// ── 更新乘客顯示 ──
+function updatePassengersField() {
+  ["adult","child","senior"].forEach(type => {
+    const el = document.getElementById(`count-${type}`);
+    if (el) el.textContent = state.passengers[type];
+  });
+  const total = state.passengers.adult + state.passengers.child + state.passengers.senior;
+  const el = document.querySelector("#field-passengers .field-row-value");
+  if (el) {
+    let text = `大人 ${state.passengers.adult} 位`;
+    if (state.passengers.child > 0) text += `，孩童 ${state.passengers.child} 位`;
+    if (state.passengers.senior > 0) text += `，敬老 ${state.passengers.senior} 位`;
+    el.textContent = text;
+  }
+}
+
+// 艙等按鈕
+const fieldCabin = document.getElementById("field-cabin");
+if (fieldCabin) fieldCabin.addEventListener("click", () => {
+  updateCabinField();
+  showPage("cabin");
+});
+
+// 乘客人數按鈕
+const fieldPassengers = document.getElementById("field-passengers");
+if (fieldPassengers) fieldPassengers.addEventListener("click", () => {
+  updatePassengersField();
+  showPage("passengers");
+});
+
+// 艙等卡片點選
+document.querySelectorAll(".option-card[data-cabin]").forEach(card => {
+  card.addEventListener("click", () => {
+    state.cabin = card.dataset.cabin;
+    updateCabinField();
+    showPage("home");
+  });
+});
+
+// 人數加減
+document.querySelectorAll(".counter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const type = btn.dataset.type;
+    const action = btn.dataset.action;
+    if (action === "plus") {
+      state.passengers[type]++;
+    } else {
+      const min = type === "adult" ? 1 : 0;
+      if (state.passengers[type] > min) state.passengers[type]--;
+    }
+    updatePassengersField();
+  });
+});
+
+// 確認人數
+const btnPassengersConfirm = document.getElementById("btn-passengers-confirm");
+if (btnPassengersConfirm) btnPassengersConfirm.addEventListener("click", () => {
+  updatePassengersField();
+  showPage("home");
+});
+
 // ── 初始化 ──
 updateTripTabs();
 updateHomeFields();
+updateCabinField();
+updatePassengersField();
