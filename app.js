@@ -117,17 +117,17 @@ const SCHEDULE = {
 
 // ── 票價（高雄出發單程，澎湖方向相同）──
 const PRICES = {
-  suite:    { adult: 1700, child: 850,  senior: 850, disabled: 850, penghu: 1190, infant: 0 },
-  first:    { adult: 1300, child: 650,  senior: 650, disabled: 650, penghu: 910,  infant: 0 },
-  berth:    { adult: 980,  child: 490,  senior: 490, disabled: 490, penghu: 686,  infant: 100 },
-  business: { adult: 980,  child: 490,  senior: 490, disabled: 490, penghu: 686,  infant: 0 },
-  economy:  { adult: 860,  child: 430,  senior: 430, disabled: 430, penghu: 602,  infant: 0 },
-  vip:      { adult: 6000, child: 6000, senior: 6000, disabled: 6000, penghu: 6000, infant: 0 },
+  suite:    { adult: 1700, child: 850,  senior: 850, disabled: 850, companion: 850, penghu: 1190, infant: 0 },
+  first:    { adult: 1300, child: 650,  senior: 650, disabled: 650, companion: 650, penghu: 910,  infant: 0 },
+  berth:    { adult: 980,  child: 490,  senior: 490, disabled: 490, companion: 490, penghu: 686,  infant: 100 },
+  business: { adult: 980,  child: 490,  senior: 490, disabled: 490, companion: 490, penghu: 686,  infant: 0 },
+  economy:  { adult: 860,  child: 430,  senior: 430, disabled: 430, companion: 430, penghu: 602,  infant: 0 },
+  vip:      { adult: 6000, child: 6000, senior: 6000, disabled: 6000, companion: 6000, penghu: 6000, infant: 0 },
 };
 
 const TICKET_LABELS = {
   adult: "全票", child: "兒童票", senior: "敬老票",
-  disabled: "愛心票", penghu: "澎湖縣民票", infant: "嬰保票",
+  disabled: "愛心票", companion: "陪同票", penghu: "澎湖縣民票", infant: "嬰保票",
 };
 
 // ── 狀態 ──
@@ -138,7 +138,7 @@ const state = {
   dateBack: null,
   dateTarget: "go",
   cabin: "economy",
-  passengers: { adult: 1, child: 0, senior: 0, disabled: 0, penghu: 0, infant: 0 },
+  passengers: { adult: 1, child: 0, senior: 0, disabled: 0, companion: 0, penghu: 0, infant: 0 },
 };
 
 // ── 工具函式 ──
