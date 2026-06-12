@@ -21,7 +21,7 @@
       <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="logo">
       <div class="header-right">
         <button class="header-icon-btn">🔔</button>
-        <button class="header-icon-btn">👤</button>
+        <button class="header-icon-btn" id="btn-profile">👤</button>
       </div>
     </header>
 
@@ -712,6 +712,70 @@
           <div class="about-desc">
             本 App 為澎湖輪高雄售票處提供旅客查詢班次、票價及初步訂票使用。實際付款及取票請至官網或售票處完成。
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 個人資料頁 -->
+    <section id="page-profile" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home">‹</button>
+        <h2>我的帳戶</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar">👤</div>
+          <div class="profile-name">旅客</div>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">個人設定</div>
+          <button class="other-row" id="btn-profile-info">
+            <span class="other-row-icon">👤</span>
+            <span class="other-row-text">個人資料設定</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-profile-passengers">
+            <span class="other-row-icon">👨‍👩‍👧</span>
+            <span class="other-row-text">常用乘客名單</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-profile-routes">
+            <span class="other-row-icon">⭐</span>
+            <span class="other-row-text">常用訂位行程</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">訂單與票券</div>
+          <button class="other-row" id="btn-profile-history">
+            <span class="other-row-icon">📋</span>
+            <span class="other-row-text">交易歷史記錄</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-profile-tickets">
+            <span class="other-row-icon">🎫</span>
+            <span class="other-row-text">票券整理</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">App 設定</div>
+          <button class="other-row" id="btn-profile-reminder">
+            <span class="other-row-icon">⏰</span>
+            <span class="other-row-text">提醒設定</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-profile-lang">
+            <span class="other-row-icon">🌐</span>
+            <span class="other-row-text">字體語言</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-profile-notify">
+            <span class="other-row-icon">🔔</span>
+            <span class="other-row-text">推播通知</span>
+            <span class="other-row-arrow">›</span>
+          </button>
         </div>
       </div>
     </section>

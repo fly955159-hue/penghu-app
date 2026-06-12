@@ -873,6 +873,10 @@ if (btnGuide) btnGuide.addEventListener("click", () => showPage("guide"));
 const btnAbout = document.getElementById("btn-other-about");
 if (btnAbout) btnAbout.addEventListener("click", () => showPage("about"));
 
+// 人頭按鈕 → 個人資料頁
+const btnProfile = document.getElementById("btn-profile");
+if (btnProfile) btnProfile.addEventListener("click", () => showPage("profile"));
+
 // 返回按鈕（含新頁面）
 document.querySelectorAll(".btn-back[data-nav]").forEach(btn => {
   btn.addEventListener("click", () => showPage(btn.dataset.nav));
