@@ -486,7 +486,14 @@ const btnSearch = document.getElementById("btn-search");
 if (btnSearch) btnSearch.addEventListener("click", searchFlights);
 
 // ── 更新車輛顯示 ──
-const VEHICLE_LABELS = { none: "不加購", motorcycle: "機車", car: "小客車" };
+const VEHICLE_LABELS = {
+  none:       "不加購",
+  bicycle:    "腳踏車",
+  motorcycle: "機車",
+  car:        "小客車／客貨車",
+  truck:      "貨車",
+  bus:        "中型遊覽車",
+};
 
 function updateVehicleField() {
   document.querySelectorAll(".option-card[data-vehicle]").forEach(card => {
