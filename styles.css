@@ -580,6 +580,19 @@ a { color: var(--blue); text-decoration: none; }
 .ticket-order-no { font-size: 0.8rem; color: var(--text-sub); }
 .ticket-pay-btn { font-size: 0.875rem; font-weight: 700; color: var(--blue); text-decoration: none; }
 
+/* ── Other Page ── */
+.other-header { display: flex; flex-direction: column; align-items: center; padding: 32px 16px 20px; }
+.other-logo { width: 64px; height: 64px; border-radius: 16px; object-fit: contain; margin-bottom: 10px; }
+.other-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.other-group { margin: 0 16px 12px; background: var(--bg); border-radius: 14px; overflow: hidden; }
+.other-group-label { font-size: 0.78rem; color: var(--text-sub); padding: 14px 16px 6px; font-weight: 600; letter-spacing: 0.03em; }
+.other-row { display: flex; align-items: center; width: 100%; padding: 14px 16px; background: none; border: none; border-top: 1px solid var(--border); cursor: pointer; text-align: left; gap: 12px; }
+.other-row:first-of-type { border-top: none; }
+.other-row-icon { font-size: 1.2rem; width: 28px; text-align: center; }
+.other-row-text { flex: 1; font-size: 1rem; color: var(--text); font-weight: 500; }
+.other-row-arrow { font-size: 1.2rem; color: var(--text-sub); }
+.other-version { text-align: center; color: var(--text-sub); font-size: 0.8rem; padding: 16px; }
+
 .flight-time {
   display: flex;
   align-items: center;

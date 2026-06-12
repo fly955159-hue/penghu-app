@@ -861,6 +861,10 @@ if (btnViewTickets) btnViewTickets.addEventListener("click", openTicketsPage);
 const tabTickets = document.getElementById("tab-tickets");
 if (tabTickets) tabTickets.addEventListener("click", openTicketsPage);
 
+// 其他 Tab
+const tabOther = document.getElementById("tab-other");
+if (tabOther) tabOther.addEventListener("click", () => showPage("other"));
+
 // 返回按鈕（含新頁面）
 document.querySelectorAll(".btn-back[data-nav]").forEach(btn => {
   btn.addEventListener("click", () => showPage(btn.dataset.nav));

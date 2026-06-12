@@ -548,6 +548,74 @@
       </div>
     </section>
 
+    <!-- 其他 -->
+    <section id="page-other" class="page">
+      <div class="page-scroll">
+        <div class="other-header">
+          <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="other-logo">
+          <div class="other-title">澎湖輪 App</div>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">航運資訊</div>
+          <button class="other-row" id="btn-other-schedule">
+            <span class="other-row-icon">🗓️</span>
+            <span class="other-row-text">航班表</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-other-price">
+            <span class="other-row-icon">💰</span>
+            <span class="other-row-text">票價資訊</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">查詢服務</div>
+          <button class="other-row" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
+            <span class="other-row-icon">🔍</span>
+            <span class="other-row-text">查詢電位代碼</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">乘船須知</div>
+          <button class="other-row" id="btn-other-notice">
+            <span class="other-row-icon">📋</span>
+            <span class="other-row-text">交易注意事項</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-other-contract">
+            <span class="other-row-icon">📄</span>
+            <span class="other-row-text">旅客運送契約</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-other-disability">
+            <span class="other-row-icon">♿</span>
+            <span class="other-row-text">障礙服務</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">關於</div>
+          <button class="other-row" id="btn-other-guide">
+            <span class="other-row-icon">📖</span>
+            <span class="other-row-text">使用導覽</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" id="btn-other-about">
+            <span class="other-row-icon">ℹ️</span>
+            <span class="other-row-text">關於這個 App</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" onclick="window.open('https://tnc-kao.com.tw','_blank')">
+            <span class="other-row-icon">🌐</span>
+            <span class="other-row-text">前往澎湖輪網站</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+        </div>
+        <div class="other-version">版本 1.0.0</div>
+      </div>
+    </section>
+
     <!-- 我的票券 -->
     <section id="page-tickets" class="page">
       <header class="page-header">
@@ -580,7 +648,7 @@
       <span class="tab-icon">📥</span>
       <span>載入訂位</span>
     </button>
-    <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw','_blank')">
+    <button class="tab-item" id="tab-other">
       <span class="tab-icon">•••</span>
       <span>其他</span>
     </button>
