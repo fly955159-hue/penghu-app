@@ -879,7 +879,7 @@ if (btnProfile) btnProfile.addEventListener("click", () => showPage("profile"));
 
 // ── 智能客服 ──
 const CHAT_RULES = [
-  { keys: ["訂票","我要訂","買票","訂船票"], reply: "好的！我幫您前往訂票頁面。", action: () => showPage("home") },
+  { keys: ["訂票","我要訂","買票","訂船票"], reply: "好的！帶您前往訂票頁面…", action: () => showPage("home") },
   { keys: ["票價","多少錢","費用","船票多少","艙等"],
     reply: "各艙等票價如下：\n• 套房艙 $1,700\n• 頭等艙 $1,300\n• 臥鋪艙 $980\n• 商務艙 $980\n• 經濟艙 $860\n• VIP 艙 $6,000\n（以上為高雄出發全票，澎湖出發略有不同）" },
   { keys: ["船期","班次","幾點","時刻","幾班","出發時間"],

@@ -629,7 +629,7 @@ a { color: var(--blue); text-decoration: none; }
 
 /* ── Profile Page ── */
 /* ── Chat Page ── */
-#page-chat { display: flex; flex-direction: column; }
+#page-chat.active { flex-direction: column; }
 .chat-page-header { flex-shrink: 0; }
 .chat-messages {
   flex: 1;
