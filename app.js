@@ -877,6 +877,79 @@ if (btnAbout) btnAbout.addEventListener("click", () => showPage("about"));
 const btnProfile = document.getElementById("btn-profile");
 if (btnProfile) btnProfile.addEventListener("click", () => showPage("profile"));
 
+// 字體大小
+const FONT_SIZES = { small: "14px", medium: "16px", large: "19px", xlarge: "22px" };
+function applyFontSize(size) {
+  document.documentElement.style.fontSize = FONT_SIZES[size] || "16px";
+  localStorage.setItem("penghu_font", size);
+  document.querySelectorAll(".font-size-check").forEach(el => el.classList.remove("active"));
+  const check = document.getElementById("check-" + size);
+  if (check) check.classList.add("active");
+}
+document.querySelectorAll(".font-size-row").forEach(btn => {
+  btn.addEventListener("click", () => applyFontSize(btn.dataset.size));
+});
+const btnProfileFont = document.getElementById("btn-profile-font");
+if (btnProfileFont) btnProfileFont.addEventListener("click", () => showPage("font"));
+
+// 語言
+const I18N = {
+  "zh-TW": {
+    lang_title: "語言", tab_tickets: "我的票券", tab_book: "訂票", tab_pay: "付款/取票",
+    tab_load: "載入訂位", tab_other: "其他", search_btn: "搜尋航班",
+    status_normal: "正常營運中", single: "單程票", round: "來回票",
+  },
+  "zh-CN": {
+    lang_title: "语言", tab_tickets: "我的票券", tab_book: "订票", tab_pay: "付款/取票",
+    tab_load: "载入订位", tab_other: "其他", search_btn: "搜寻航班",
+    status_normal: "正常营运中", single: "单程票", round: "来回票",
+  },
+  "en": {
+    lang_title: "Language", tab_tickets: "My Tickets", tab_book: "Book", tab_pay: "Pay/Collect",
+    tab_load: "Load Booking", tab_other: "More", search_btn: "Search Flights",
+    status_normal: "Operating Normally", single: "One Way", round: "Round Trip",
+  },
+  "ja": {
+    lang_title: "言語", tab_tickets: "チケット", tab_book: "予約", tab_pay: "支払/発券",
+    tab_load: "予約読込", tab_other: "その他", search_btn: "便を検索",
+    status_normal: "通常運航中", single: "片道", round: "往復",
+  },
+};
+function applyLang(lang) {
+  const t = I18N[lang] || I18N["zh-TW"];
+  localStorage.setItem("penghu_lang", lang);
+  document.querySelectorAll(".lang-check").forEach(el => el.classList.remove("active"));
+  const check = document.getElementById("check-" + lang);
+  if (check) check.classList.add("active");
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key]) el.textContent = t[key];
+  });
+  const tabSpans = document.querySelectorAll(".tab-item span:not(.tab-icon)");
+  const keys = ["tab_tickets", "tab_book", "tab_pay", "tab_load", "tab_other"];
+  tabSpans.forEach((span, i) => { if (keys[i] && t[keys[i]]) span.textContent = t[keys[i]]; });
+  const searchBtn = document.getElementById("btn-search");
+  if (searchBtn && t.search_btn) searchBtn.textContent = t.search_btn;
+  const statusEl = document.querySelector(".status-text");
+  if (statusEl && t.status_normal) statusEl.textContent = t.status_normal;
+  const tripBtns = document.querySelectorAll(".trip-tab");
+  if (tripBtns[0] && t.single) tripBtns[0].textContent = t.single;
+  if (tripBtns[1] && t.round) tripBtns[1].textContent = t.round;
+}
+document.querySelectorAll(".lang-row").forEach(btn => {
+  btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+});
+const btnProfileLang = document.getElementById("btn-profile-lang");
+if (btnProfileLang) btnProfileLang.addEventListener("click", () => showPage("lang"));
+
+// 啟動時還原設定
+const savedFont = localStorage.getItem("penghu_font");
+if (savedFont) applyFontSize(savedFont);
+else document.getElementById("check-medium") && document.getElementById("check-medium").classList.add("active");
+const savedLang = localStorage.getItem("penghu_lang");
+if (savedLang) applyLang(savedLang);
+else { const c = document.getElementById("check-zh-TW"); if (c) c.classList.add("active"); }
+
 // 返回按鈕（含新頁面）
 document.querySelectorAll(".btn-back[data-nav]").forEach(btn => {
   btn.addEventListener("click", () => showPage(btn.dataset.nav));

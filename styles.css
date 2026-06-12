@@ -618,6 +618,20 @@ a { color: var(--blue); text-decoration: none; }
 .profile-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
 .profile-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
 
+/* ── Font Size Page ── */
+.font-preview-card { background: var(--white); border-radius: 14px; padding: 24px 20px; margin-bottom: 16px; text-align: center; }
+.font-preview-label { font-size: 0.78rem; color: var(--text-sub); margin-bottom: 10px; }
+.font-preview-text { font-weight: 600; color: var(--text); line-height: 1.7; }
+.font-size-icon { font-weight: 700; color: var(--blue); min-width: 28px; text-align: center; }
+.font-size-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); }
+.font-size-check.active { background: var(--blue); border-color: var(--blue); display: flex; align-items: center; justify-content: center; }
+.font-size-check.active::after { content: '✓'; color: #fff; font-size: 0.75rem; font-weight: 700; }
+
+/* ── Language Page ── */
+.lang-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); }
+.lang-check.active { background: var(--blue); border-color: var(--blue); display: flex; align-items: center; justify-content: center; }
+.lang-check.active::after { content: '✓'; color: #fff; font-size: 0.75rem; font-weight: 700; }
+
 .flight-time {
   display: flex;
   align-items: center;

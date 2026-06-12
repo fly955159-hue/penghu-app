@@ -766,15 +766,91 @@
             <span class="other-row-text">提醒設定</span>
             <span class="other-row-arrow">›</span>
           </button>
+          <button class="other-row" id="btn-profile-font">
+            <span class="other-row-icon">🔤</span>
+            <span class="other-row-text">字體大小</span>
+            <span class="other-row-arrow">›</span>
+          </button>
           <button class="other-row" id="btn-profile-lang">
             <span class="other-row-icon">🌐</span>
-            <span class="other-row-text">字體語言</span>
+            <span class="other-row-text">語言</span>
             <span class="other-row-arrow">›</span>
           </button>
           <button class="other-row" id="btn-profile-notify">
             <span class="other-row-icon">🔔</span>
             <span class="other-row-text">推播通知</span>
             <span class="other-row-arrow">›</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 字體大小 -->
+    <section id="page-font" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="profile">‹</button>
+        <h2>字體大小</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="font-preview-card">
+          <div class="font-preview-label">預覽</div>
+          <div class="font-preview-text" id="font-preview-text">澎湖輪訂票系統<br>高雄 ⇄ 馬公</div>
+        </div>
+        <div class="other-group">
+          <div class="other-group-label">選擇大小</div>
+          <button class="other-row font-size-row" data-size="small">
+            <span class="other-row-icon font-size-icon" style="font-size:0.9rem;">A</span>
+            <span class="other-row-text">小</span>
+            <span class="font-size-check" id="check-small"></span>
+          </button>
+          <button class="other-row font-size-row" data-size="medium">
+            <span class="other-row-icon font-size-icon" style="font-size:1.1rem;">A</span>
+            <span class="other-row-text">中（預設）</span>
+            <span class="font-size-check" id="check-medium"></span>
+          </button>
+          <button class="other-row font-size-row" data-size="large">
+            <span class="other-row-icon font-size-icon" style="font-size:1.4rem;">A</span>
+            <span class="other-row-text">大</span>
+            <span class="font-size-check" id="check-large"></span>
+          </button>
+          <button class="other-row font-size-row" data-size="xlarge">
+            <span class="other-row-icon font-size-icon" style="font-size:1.7rem;">A</span>
+            <span class="other-row-text">超大</span>
+            <span class="font-size-check" id="check-xlarge"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 語言選擇 -->
+    <section id="page-lang" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="profile">‹</button>
+        <h2 data-i18n="lang_title">語言</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="other-group">
+          <button class="other-row lang-row" data-lang="zh-TW">
+            <span class="other-row-icon">🇹🇼</span>
+            <span class="other-row-text">繁體中文</span>
+            <span class="lang-check" id="check-zh-TW"></span>
+          </button>
+          <button class="other-row lang-row" data-lang="zh-CN">
+            <span class="other-row-icon">🇨🇳</span>
+            <span class="other-row-text">简体中文</span>
+            <span class="lang-check" id="check-zh-CN"></span>
+          </button>
+          <button class="other-row lang-row" data-lang="en">
+            <span class="other-row-icon">🇺🇸</span>
+            <span class="other-row-text">English</span>
+            <span class="lang-check" id="check-en"></span>
+          </button>
+          <button class="other-row lang-row" data-lang="ja">
+            <span class="other-row-icon">🇯🇵</span>
+            <span class="other-row-text">日本語</span>
+            <span class="lang-check" id="check-ja"></span>
           </button>
         </div>
       </div>
