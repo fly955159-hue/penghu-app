@@ -20,8 +20,20 @@
     <header class="app-header">
       <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="logo">
       <div class="header-right">
-        <button class="header-icon-btn">🔔</button>
-        <button class="header-icon-btn" id="btn-profile">👤</button>
+        <button class="header-icon-btn header-announce-btn" id="btn-announce">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <span class="announce-dot" id="announce-dot"></span>
+        </button>
+        <button class="header-icon-btn" id="btn-profile">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
       </div>
     </header>
 

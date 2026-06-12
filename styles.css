@@ -62,17 +62,31 @@ a { color: var(--blue); text-decoration: none; }
 .header-right { display: flex; gap: 8px; }
 
 .header-icon-btn {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border: none;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.18);
   border-radius: 50%;
   cursor: pointer;
   font-size: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
+  position: relative;
 }
+.header-icon-btn svg { stroke: #fff; }
+.header-announce-btn { background: rgba(255,255,255,0.22); }
+.announce-dot {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 8px; height: 8px;
+  background: #ff3b30;
+  border-radius: 50%;
+  border: 1.5px solid var(--blue);
+  display: none;
+}
+.announce-dot.show { display: block; }
 
 /* ── Nav Tabs (第二行) ── */
 .nav-tabs {
