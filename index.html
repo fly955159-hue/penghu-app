@@ -110,7 +110,7 @@
 
             <div class="field-row-divider"></div>
 
-            <button class="field-row" data-nav="vehicle">
+            <button class="field-row" id="field-vehicle">
               <span class="field-row-icon">🚗</span>
               <div class="field-row-text">
                 <span class="field-row-label">加購車輛</span>
@@ -297,6 +297,54 @@
         <button class="btn btn-primary btn-large" id="btn-passengers-confirm" style="border-radius:12px;margin-top:24px;">
           確認人數
         </button>
+      </div>
+    </section>
+
+    <!-- 加購車輛 -->
+    <section id="page-vehicle" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home">‹</button>
+        <h2>加購車輛</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <p class="section-label">請選擇是否加購車輛運送</p>
+        <div class="option-cards">
+          <button class="option-card" data-vehicle="none">
+            <div class="option-card-left">
+              <span class="option-icon">🚶</span>
+              <div class="option-info">
+                <span class="option-name">不加購</span>
+                <span class="option-hint">僅購買人員船票</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-vehicle-none"></span>
+          </button>
+          <button class="option-card" data-vehicle="motorcycle">
+            <div class="option-card-left">
+              <span class="option-icon">🏍️</span>
+              <div class="option-info">
+                <span class="option-name">機車</span>
+                <span class="option-hint">一般重型機車</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-vehicle-motorcycle"></span>
+          </button>
+          <button class="option-card" data-vehicle="car">
+            <div class="option-card-left">
+              <span class="option-icon">🚗</span>
+              <div class="option-info">
+                <span class="option-name">小客車</span>
+                <span class="option-hint">一般轎車、休旅車</span>
+              </div>
+            </div>
+            <span class="option-check" id="check-vehicle-car"></span>
+          </button>
+        </div>
+        <div class="cal-hint" style="margin-top:16px">
+          <span>📌 車輛裝卸開航前 30 分鐘截止，請提早抵達</span><br>
+          <span>📌 實際車輛票價請以官網公告為準</span>
+        </div>
       </div>
     </section>
 

@@ -139,6 +139,7 @@ const state = {
   dateTarget: "go",
   timeGo: null,
   timeBack: null,
+  vehicle: "none",
   cabin: "economy",
   passengers: { adult: 1, child: 0, senior: 0, disabled: 0, companion: 0, penghu: 0, infant: 0 },
 };
@@ -484,6 +485,31 @@ if (btnDateConfirm) btnDateConfirm.addEventListener("click", confirmDate);
 const btnSearch = document.getElementById("btn-search");
 if (btnSearch) btnSearch.addEventListener("click", searchFlights);
 
+// ── 更新車輛顯示 ──
+const VEHICLE_LABELS = { none: "不加購", motorcycle: "機車", car: "小客車" };
+
+function updateVehicleField() {
+  document.querySelectorAll(".option-card[data-vehicle]").forEach(card => {
+    const check = card.querySelector(".option-check");
+    if (check) check.textContent = card.dataset.vehicle === state.vehicle ? "✓" : "";
+  });
+  const el = document.querySelector("#field-vehicle .field-row-value");
+  if (el) el.textContent = VEHICLE_LABELS[state.vehicle];
+}
+
+// 車輛按鈕
+const fieldVehicle = document.getElementById("field-vehicle");
+if (fieldVehicle) fieldVehicle.addEventListener("click", () => { updateVehicleField(); showPage("vehicle"); });
+
+// 車輛卡片點選
+document.querySelectorAll(".option-card[data-vehicle]").forEach(card => {
+  card.addEventListener("click", () => {
+    state.vehicle = card.dataset.vehicle;
+    updateVehicleField();
+    showPage("home");
+  });
+});
+
 // 艙等按鈕
 const fieldCabin = document.getElementById("field-cabin");
 if (fieldCabin) fieldCabin.addEventListener("click", () => { updateCabinField(); showPage("cabin"); });
@@ -538,3 +564,4 @@ updateTripTabs();
 updateHomeFields();
 updateCabinField();
 updatePassengersField();
+updateVehicleField();
