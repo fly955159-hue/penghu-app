@@ -445,13 +445,118 @@
     <section id="page-results" class="page">
       <header class="page-header">
         <button class="btn-back" data-nav="home">‹</button>
-        <h2>航班查詢結果</h2>
+        <h2>選擇班次</h2>
         <div class="header-spacer"></div>
       </header>
       <div class="page-content">
         <div class="search-summary" id="search-summary"></div>
         <div class="flight-list" id="flight-list"></div>
-        <p class="confirm-note">完整訂票請前往 <a href="https://tnc-kao.com.tw/booking" target="_blank" rel="noopener">官網線上訂票</a></p>
+        <button class="btn btn-primary btn-large" id="btn-next-info" disabled style="border-radius:12px;margin-top:8px;">
+          下一步：填寫旅客資料
+        </button>
+      </div>
+    </section>
+
+    <!-- 車輛細項 -->
+    <section id="page-vehicle-sub" class="page">
+      <header class="page-header">
+        <button class="btn-back" id="btn-vehicle-sub-back">‹</button>
+        <h2 id="vehicle-sub-title">選擇車輛細項</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div id="vehicle-sub-options"></div>
+        <button class="btn btn-primary btn-large" id="btn-vehicle-sub-confirm" disabled style="border-radius:12px;margin-top:16px;">
+          確認車輛
+        </button>
+      </div>
+    </section>
+
+    <!-- 旅客資料 -->
+    <section id="page-info" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="results">‹</button>
+        <h2>填寫旅客資料</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="form-card">
+          <div class="form-row">
+            <label class="form-label">訂票人姓名 <span class="required">*</span></label>
+            <input class="form-input" id="info-name" type="text" placeholder="請輸入中文姓名">
+          </div>
+          <div class="form-row">
+            <label class="form-label">手機號碼 <span class="required">*</span></label>
+            <input class="form-input" id="info-phone" type="tel" placeholder="09xxxxxxxx">
+          </div>
+          <div class="form-row">
+            <label class="form-label">身分證字號 <span class="required">*</span></label>
+            <input class="form-input" id="info-id" type="text" placeholder="A123456789">
+          </div>
+          <div class="form-row">
+            <label class="form-label">電子信箱</label>
+            <input class="form-input" id="info-email" type="email" placeholder="example@email.com">
+          </div>
+        </div>
+        <p class="cal-hint" style="margin-top:8px">📌 旅客資料僅供本次訂票確認使用，不會上傳至任何系統</p>
+        <button class="btn btn-primary btn-large" id="btn-next-confirm" style="border-radius:12px;margin-top:12px;">
+          下一步：確認訂單
+        </button>
+      </div>
+    </section>
+
+    <!-- 確認訂單 -->
+    <section id="page-confirm" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="info">‹</button>
+        <h2>確認訂單</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div id="confirm-content"></div>
+        <div class="confirm-total-box" id="confirm-total"></div>
+        <p class="cal-hint" style="margin-top:8px">📌 此為訂單摘要，實際付款請前往官網完成</p>
+        <button class="btn btn-primary btn-large" id="btn-submit-order" style="border-radius:12px;margin-top:12px;">
+          確認送出
+        </button>
+      </div>
+    </section>
+
+    <!-- 訂單完成 -->
+    <section id="page-done" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home">‹</button>
+        <h2>訂單完成</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="done-card">
+          <div class="done-icon">✅</div>
+          <div class="done-title">訂單已記錄</div>
+          <div class="done-order-no" id="done-order-no"></div>
+          <div class="done-hint">請前往官網完成付款，方可確認訂位</div>
+        </div>
+        <div id="done-summary"></div>
+        <a href="https://tnc-kao.com.tw/booking" target="_blank" rel="noopener"
+           class="btn btn-primary btn-large" style="border-radius:12px;margin-top:12px;display:block;text-align:center;text-decoration:none;padding:16px;">
+          前往官網付款
+        </a>
+        <button class="btn btn-large" id="btn-view-tickets"
+           style="border-radius:12px;margin-top:10px;background:var(--bg);color:var(--blue);font-weight:700;border:1.5px solid var(--blue);">
+          查看我的車票
+        </button>
+      </div>
+    </section>
+
+    <!-- 我的車票 -->
+    <section id="page-tickets" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="home">‹</button>
+        <h2>我的車票</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div id="tickets-list"></div>
       </div>
     </section>
 
@@ -459,7 +564,7 @@
 
   <!-- 底部 Tab Bar -->
   <nav class="tab-bar">
-    <button class="tab-item" onclick="window.open('https://tnc-kao.com.tw/order/code','_blank')">
+    <button class="tab-item" id="tab-tickets">
       <span class="tab-icon">🎫</span>
       <span>我的車票</span>
     </button>
