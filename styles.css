@@ -593,6 +593,26 @@ a { color: var(--blue); text-decoration: none; }
 .other-row-arrow { font-size: 1.2rem; color: var(--text-sub); }
 .other-version { text-align: center; color: var(--text-sub); font-size: 0.8rem; padding: 16px; }
 
+/* ── Guide Page ── */
+.guide-step { display: flex; gap: 16px; padding: 16px; background: var(--white); border-radius: 14px; margin-bottom: 10px; }
+.guide-step-num { width: 32px; height: 32px; min-width: 32px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+.guide-step-title { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+.guide-step-desc { font-size: 0.875rem; color: var(--text-sub); line-height: 1.5; }
+.guide-note { margin-top: 16px; background: var(--bg); border-radius: 12px; padding: 16px; font-size: 0.875rem; color: var(--text-sub); text-align: center; line-height: 1.8; }
+
+/* ── About Page ── */
+.about-logo-wrap { display: flex; flex-direction: column; align-items: center; padding: 28px 16px 16px; }
+.about-logo { width: 72px; height: 72px; border-radius: 18px; object-fit: contain; margin-bottom: 10px; }
+.about-app-name { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+.about-version { font-size: 0.82rem; color: var(--text-sub); margin-top: 4px; }
+.about-card { background: var(--white); border-radius: 14px; margin: 0 0 12px; overflow: hidden; }
+.about-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.about-row:last-child { border-bottom: none; }
+.about-label { font-size: 0.9rem; color: var(--text-sub); }
+.about-value { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+.about-link { color: var(--blue); text-decoration: underline; cursor: pointer; }
+.about-desc { padding: 16px; font-size: 0.875rem; color: var(--text-sub); line-height: 1.7; }
+
 .flight-time {
   display: flex;
   align-items: center;

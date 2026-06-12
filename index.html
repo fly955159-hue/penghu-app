@@ -557,14 +557,19 @@
         </div>
         <div class="other-group">
           <div class="other-group-label">航運資訊</div>
-          <button class="other-row" id="btn-other-schedule">
+          <button class="other-row" onclick="window.open('https://tnc-kao.com.tw/schedule/timetable','_blank')">
             <span class="other-row-icon">🗓️</span>
             <span class="other-row-text">航班表</span>
             <span class="other-row-arrow">›</span>
           </button>
-          <button class="other-row" id="btn-other-price">
-            <span class="other-row-icon">💰</span>
-            <span class="other-row-text">票價資訊</span>
+          <button class="other-row" onclick="window.open('https://tnc-kao.com.tw/schedule/ticket','_blank')">
+            <span class="other-row-icon">🚢</span>
+            <span class="other-row-text">船票票價</span>
+            <span class="other-row-arrow">›</span>
+          </button>
+          <button class="other-row" onclick="window.open('https://tnc-kao.com.tw/transport/information','_blank')">
+            <span class="other-row-icon">🚗</span>
+            <span class="other-row-text">車票票價</span>
             <span class="other-row-arrow">›</span>
           </button>
         </div>
@@ -590,7 +595,7 @@
           </button>
           <button class="other-row" id="btn-other-disability">
             <span class="other-row-icon">♿</span>
-            <span class="other-row-text">障礙服務</span>
+            <span class="other-row-text">無障礙服務</span>
             <span class="other-row-arrow">›</span>
           </button>
         </div>
@@ -613,6 +618,101 @@
           </button>
         </div>
         <div class="other-version">版本 1.0.0</div>
+      </div>
+    </section>
+
+    <!-- 使用導覽 -->
+    <section id="page-guide" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="other">‹</button>
+        <h2>使用導覽</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="guide-step">
+          <div class="guide-step-num">1</div>
+          <div class="guide-step-body">
+            <div class="guide-step-title">選擇航程</div>
+            <div class="guide-step-desc">選擇單程或來回票，並選擇出發地（高雄 或 馬公）。</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">2</div>
+          <div class="guide-step-body">
+            <div class="guide-step-title">選擇艙等與人數</div>
+            <div class="guide-step-desc">依需求選擇艙等（套房、頭等、臥鋪、商務、經濟、VIP），並填入各票種人數。</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">3</div>
+          <div class="guide-step-body">
+            <div class="guide-step-title">加購車輛（選填）</div>
+            <div class="guide-step-desc">如需攜帶車輛，可選擇機車、小客車、貨車、腳踏車或中型遊覽車，並選擇排氣量／噸數。</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">4</div>
+          <div class="guide-step-body">
+            <div class="guide-step-title">選擇日期與班次</div>
+            <div class="guide-step-desc">從日曆選擇出發日期，再選擇當天可搭乘的班次。</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">5</div>
+          <div class="guide-step-body">
+            <div class="guide-step-title">填寫旅客資料</div>
+            <div class="guide-step-desc">填入姓名、手機、身分證字號及電子信箱。</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">6</div>
+          <div class="guide-step-body">
+            <div class="guide-step-title">確認並送出訂單</div>
+            <div class="guide-step-desc">確認所有資訊無誤後送出，訂單將記錄於「我的票券」。再前往官網完成付款。</div>
+          </div>
+        </div>
+        <div class="guide-note">
+          如需協助，請聯絡高雄售票處<br>電話：07-561-5313
+        </div>
+      </div>
+    </section>
+
+    <!-- 關於這個 App -->
+    <section id="page-about" class="page">
+      <header class="page-header">
+        <button class="btn-back" data-nav="other">‹</button>
+        <h2>關於這個 App</h2>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="page-content">
+        <div class="about-logo-wrap">
+          <img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="澎湖輪" class="about-logo">
+          <div class="about-app-name">澎湖輪 App</div>
+          <div class="about-version">版本 1.0.0</div>
+        </div>
+        <div class="about-card">
+          <div class="about-row">
+            <span class="about-label">營運公司</span>
+            <span class="about-value">臺灣輪船股份有限公司</span>
+          </div>
+          <div class="about-row">
+            <span class="about-label">高雄售票處</span>
+            <span class="about-value">07-561-5313</span>
+          </div>
+          <div class="about-row">
+            <span class="about-label">馬公售票處</span>
+            <span class="about-value">06-926-3605</span>
+          </div>
+          <div class="about-row">
+            <span class="about-label">官方網站</span>
+            <span class="about-value about-link" onclick="window.open('https://tnc-kao.com.tw','_blank')">tnc-kao.com.tw</span>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-desc">
+            本 App 為澎湖輪高雄售票處提供旅客查詢班次、票價及初步訂票使用。實際付款及取票請至官網或售票處完成。
+          </div>
+        </div>
       </div>
     </section>
 

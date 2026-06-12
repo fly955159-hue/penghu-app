@@ -865,6 +865,14 @@ if (tabTickets) tabTickets.addEventListener("click", openTicketsPage);
 const tabOther = document.getElementById("tab-other");
 if (tabOther) tabOther.addEventListener("click", () => showPage("other"));
 
+// 使用導覽
+const btnGuide = document.getElementById("btn-other-guide");
+if (btnGuide) btnGuide.addEventListener("click", () => showPage("guide"));
+
+// 關於這個 App
+const btnAbout = document.getElementById("btn-other-about");
+if (btnAbout) btnAbout.addEventListener("click", () => showPage("about"));
+
 // 返回按鈕（含新頁面）
 document.querySelectorAll(".btn-back[data-nav]").forEach(btn => {
   btn.addEventListener("click", () => showPage(btn.dataset.nav));
