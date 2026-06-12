@@ -877,6 +877,100 @@ if (btnAbout) btnAbout.addEventListener("click", () => showPage("about"));
 const btnProfile = document.getElementById("btn-profile");
 if (btnProfile) btnProfile.addEventListener("click", () => showPage("profile"));
 
+// ── 智能客服 ──
+const CHAT_RULES = [
+  { keys: ["訂票","我要訂","買票","訂船票"], reply: "好的！我幫您前往訂票頁面。", action: () => showPage("home") },
+  { keys: ["票價","多少錢","費用","船票多少","艙等"],
+    reply: "各艙等票價如下：\n• 套房艙 $1,700\n• 頭等艙 $1,300\n• 臥鋪艙 $980\n• 商務艙 $980\n• 經濟艙 $860\n• VIP 艙 $6,000\n（以上為高雄出發全票，澎湖出發略有不同）" },
+  { keys: ["船期","班次","幾點","時刻","幾班","出發時間"],
+    reply: "請問您要查詢哪一天的班次？\n您也可以直接在訂票頁面選擇日期查詢。", action: () => {} },
+  { keys: ["機車","腳踏車","自行車","汽車","小客車","貨車","車輛","帶車"],
+    reply: "車輛加購費用（高雄出發）：\n• 腳踏車 $235（人隨車）\n• 機車 100cc 以下 $596\n• 機車 101~150cc $796\n• 小客車 2799cc 以下 $2,244\n詳細費用可至「其他→車票票價」查詢。" },
+  { keys: ["電話","聯絡","地址","售票","在哪","怎麼找"],
+    reply: "售票處聯絡資訊：\n📍 高雄售票處\n電話：07-561-5313\n\n📍 馬公售票處\n電話：06-926-3605\n\n官網：tnc-kao.com.tw" },
+  { keys: ["退票","取消","退款","可以退"],
+    reply: "退票規定：\n• 開航前 5 天以上：退全額\n• 開航前 2~4 天：退 90%\n• 開航前 1 天：退 80%\n• 開航當天：退 50%\n退票請電洽售票處辦理。" },
+  { keys: ["報到","幾點要到","check in","登船","登記"],
+    reply: "搭船報到時間規定：\n• 請於開航前 60 分鐘完成報到\n• 開航前 30 分鐘截止登船\n• 攜帶車輛旅客請提早 90 分鐘到場" },
+  { keys: ["行李","可以帶","帶什麼","限制","規定"],
+    reply: "行李規定：\n• 每位旅客免費行李限額為 20 公斤\n• 超重行李另計費用\n• 危險品、寵物依規定辦理\n詳情請洽售票處。" },
+  { keys: ["天氣","颱風","停航","有沒有開","今天有船"],
+    reply: "航班是否正常行駛請以官方公告為準。\n如遇颱風或惡劣天氣可能停航，建議出發前確認。\n官網：tnc-kao.com.tw" },
+  { keys: ["謝謝","感謝","好的","知道了","了解"],
+    reply: "不客氣！如有其他問題隨時詢問。祝您旅途愉快！" },
+  { keys: ["你好","您好","哈囉","hi","hello"],
+    reply: "您好！我是澎湖輪智能客服，可以幫您查詢票價、船期、訂票相關問題。請問需要什麼協助？" },
+];
+
+function chatGetReply(msg) {
+  const m = msg.trim().toLowerCase();
+  for (const rule of CHAT_RULES) {
+    if (rule.keys.some(k => m.includes(k))) return rule;
+  }
+  return { reply: "抱歉，我目前無法回答這個問題。\n您可以嘗試詢問「票價」、「船期」、「訂票」或「聯絡售票處」，或直接撥打：\n📞 07-561-5313（高雄）" };
+}
+
+function chatAddMsg(text, isUser = false) {
+  const wrap = document.createElement("div");
+  wrap.className = "chat-bubble-wrap" + (isUser ? " user" : "");
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2,"0") + ":" + now.getMinutes().toString().padStart(2,"0");
+  if (!isUser) {
+    wrap.innerHTML = `
+      <div class="chat-avatar"><img src="https://tnc-kao.com.tw/images/icons/logo.png" alt="客服"></div>
+      <div>
+        <div class="chat-bubble">${text.replace(/\n/g,"<br>")}</div>
+        <div class="chat-time">${timeStr}</div>
+      </div>`;
+  } else {
+    wrap.innerHTML = `
+      <div>
+        <div class="chat-bubble">${text.replace(/\n/g,"<br>")}</div>
+        <div class="chat-time" style="text-align:right">${timeStr}</div>
+      </div>`;
+  }
+  const msgs = document.getElementById("chat-messages");
+  if (msgs) { msgs.appendChild(wrap); msgs.scrollTop = msgs.scrollHeight; }
+}
+
+function chatSend(msg) {
+  if (!msg.trim()) return;
+  chatAddMsg(msg, true);
+  const input = document.getElementById("chat-input");
+  if (input) input.value = "";
+  setTimeout(() => {
+    const rule = chatGetReply(msg);
+    chatAddMsg(rule.reply);
+    if (rule.action) setTimeout(rule.action, 800);
+  }, 400);
+}
+
+function openChatPage() {
+  showPage("chat");
+  const msgs = document.getElementById("chat-messages");
+  if (msgs && msgs.children.length === 0) {
+    setTimeout(() => chatAddMsg("您好！我是澎湖輪智能客服。\n請問需要什麼協助？"), 300);
+  }
+}
+
+const btnAnnounce = document.getElementById("btn-announce");
+if (btnAnnounce) btnAnnounce.addEventListener("click", openChatPage);
+
+document.querySelectorAll(".chat-quick-btn").forEach(btn => {
+  btn.addEventListener("click", () => chatSend(btn.dataset.msg));
+});
+
+const chatSendBtn = document.getElementById("chat-send-btn");
+if (chatSendBtn) chatSendBtn.addEventListener("click", () => {
+  const input = document.getElementById("chat-input");
+  if (input) chatSend(input.value);
+});
+
+const chatInput = document.getElementById("chat-input");
+if (chatInput) chatInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") chatSend(chatInput.value);
+});
+
 // 字體大小
 const FONT_SIZES = { small: "14px", medium: "16px", large: "19px", xlarge: "22px" };
 function applyFontSize(size) {
